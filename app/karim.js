@@ -10,9 +10,14 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
 var expressValidator = require('express-validator');
+var mongojs = require('mongojs');
+var db = mongojs('SEProject', ['companies']);
 var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname,'views'));
 
 //Global variables
 app.use (function(req,res,next){
@@ -20,51 +25,76 @@ app.use (function(req,res,next){
   next();
 });
 
+// Express Validator Middleware
+app.use(expressValidator({
+  errorFormatter: function(param, msg, value) {
+      var namespace = param.split('.')
+      , root = namespace.shift()
+      , formParam = root;
+
+    while(namespace.length) {
+      formParam += '[' + namespace.shift() + ']';
+    }
+    return {
+      param : formParam,
+      msg   : msg,
+      value : value
+    };
+  }
+}));
+
+
+app.get('/',function(req,res){
+  db.companies.find( function (err, docs) {
+    res.render('mainPage' , {
+      companies: docs
+
+    });
+  })
+
+});
+
+
 //3.2 user can search for activates so that he can find an activity needed
 // this function is  called with a "Search_bar" paramater from user and finds the activity with that name.
 // i am assuming that companies are linked with their respective activities using an id.
 //(as in each company has a list of ids and each activity has a unique id)
-app.post('/mainPage/search', function(req,res){
+app.post('/mainPage/search', function(req,res) {
 
 req.checkBody('Search_bar', 'Please enter a search word').notEmpty();
 var errors = req.validationErrors();
 if(errors){
-  res.render('errorPage' , { });
+  res.render('errorPage' , {error: errors });
 }
 else {
 var Search_bar = req.Search_bar;
-db.activites.find( {activity_Name : Search_bar},id,
-  function(err,doc_activity){
-db.companies.find({},function(err,doc_company){
 
-    var returnedCompanies: [];
-    var companyLength = doc_company.activity_id.length;
+db.activites.find( {activity_Name : Search_bar},
+function(err,doc_activity){
+//db.companies.find({},function(err,doc_company){
+
+  //  var returnedCompanies= [];
+  //  var companyLength = doc_company.activity_id.length;
     var activitiesLength = doc_activity.length;
-    for (var i = 0; i < companyLength; i++) {
-      for (var j = 0; j<activitiesLength; j++)
-      {
+  //  for (var i = 0; i < companyLength; i++) {
+  //    for (var j = 0; j<activitiesLength; j++)
+  //    {
 
-        if (doc_company.activity_id[i]==doc_activity[j])
-        {
-            returnedCompanies.push(doc_company[i]);
-        }
-      }
+    //    if (doc_company.activity_id[i]==doc_activity[j])
+    //    {
+      //      returnedCompanies.push(doc_company[i]);
+      //  }
+    //  }}
 
       res.render('mainPage',
                 {
-                    companies:returnedCompanies
+                    activity:doc_activity
                 });
+//})
+
 })
+}
 
-
-    var activites_ID: [];
-    var arrayLength = doc.length;
-for (var i = 0; i < arrayLength; i++) {
-
-if(doc.id == )
-{activities_ID.push();}
-
-}})}
 });
 
 
@@ -73,15 +103,16 @@ if(doc.id == )
 // this function is  called with a "user_location" paramater entered by the user and finds the companies in that location and returns
 // a list of the companies to the main page.
 app.post('/mainPage/filter', function(req,res){
+  var User_location = req.body.User_location;
 
-  db.companies.find( {user_location : location},
+  db.companies.find( {location : User_location},
     function(err,doc){
-      if(err){  res.render('errorPage' , { });}
+      if(err){  res.render('errorPage' , { error: err});}
 else {
-
+console.log(doc)
   res.render('mainPage',
             {
-                companies: doc
+                companies: doc // assuming main page will only need companies for now
             });
 }
     })
@@ -91,22 +122,25 @@ else {
 
 
 //company submit ad image in a link formate
-app.post('/submit_img_link',function(req,res) {
+app.get('/submit/imageLink',function(req,res) {
+
+  var newlink = req.body.newlink;
+  var company = req.body.company;
 
   db.company.count({}, function(err, c) {
 
 
-  var newlink = req.body.newlink;
-  var company = req.body.company;
-if(c<max_ads)
+
+if(c<5) //how many ads will we have? perhaps some function of number of companies?
 {
+
 db.company.findOne(
   {Company_name : company},
     function(err,doc){
       var curlist = doc.ads
       curlist.push(newlink)
 
-      db.users.findAndModify({
+      db.companies.findAndModify({
         query:{Company_name : company},
         update: {$set: {ads : curlist}},
         new: true
@@ -115,18 +149,24 @@ db.company.findOne(
       db.ads.insert(newlink,function(err,result){
 
         res.render('profile' , {
-          company:doc
+          company:company // not sure what to pass for profile yet.
         });
-
-      }
       })
-    }))
+    })
+
+    })
+
   } else {
     res.render('profile' , {
       company:doc,
       error: "we dont currently have an empty place for your ad :("
     });
   }
-  });
 
+  });
 });
+
+
+app.listen(4000,function() {
+console.log('server started on port 4000...')
+})
