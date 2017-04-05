@@ -123,15 +123,22 @@ console.log(doc)
 
 //company submit ad image in a link formate
 app.get('/submit/imageLink',function(req,res) {
-
+ var n =0;
   var newlink = req.body.newlink;
   var company = req.body.company;
 
   db.company.count({}, function(err, c) {
 
+ db.company.find({}, function(err,doc)
+  {
+   for(var i=0;i<c;i++)
+   {
+    
+     n= n+ docs[i].ads.length;
+   }
+ })
 
-
-if(c<5) //how many ads will we have? perhaps some function of number of companies?
+if(n<5) //how many ads will we have? perhaps some function of number of companies?
 {
 
 db.company.findOne(
