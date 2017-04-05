@@ -6,11 +6,18 @@ var mongoose=require('mongoose');
 var router=express.Router();
 var bodyParser = require('body-parser');
 var appRoutes;
+//yehia router Config
+var router =require('./app/routes/yehiaRoutes');
 var path=require('path');
+
+
 app.use(morgan('dev'));
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(__dirname + '/public'));
+
 mongoose.connect('mongodb://localhost:27017/student',function(err)
 {
     if(err)
@@ -21,6 +28,9 @@ mongoose.connect('mongodb://localhost:27017/student',function(err)
         console.log('success');
     }
 });
+
+app.use(router);
+
 app.get('*',function(req,res)
 {
 });
