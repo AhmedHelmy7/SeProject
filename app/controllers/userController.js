@@ -25,9 +25,9 @@ let userController={
             callback(null,isMatch);
         });
 
-    }
+    },
 
-adminBan: function(req, res) {
+adminBan:function(req, res) {
   User.findOneAndUpdate({username:req.body.username},{isBanned:true},{},function(err, res){
     // End session
   if (err) {
@@ -36,9 +36,9 @@ adminBan: function(req, res) {
                 console.log('Banned');
            }
 });
-}
+},
 
-adminDeban: function(req, res) {
+adminDeban:function(req, res) {
 if(!req.body.isAdmin)
   User.findOneAndUpdate({username:req.body.username},{isBanned:false},{},function(err, res){
     // End session
@@ -47,7 +47,7 @@ if(!req.body.isAdmin)
   else 
         console.log('Debanned');
 });
-}
+},
 
 
 deleteReview:function(req,res) {
@@ -59,6 +59,6 @@ deleteReview:function(req,res) {
         console.log('Debanned');
 });
 }
-
+}
 module.exports=userController;
 
