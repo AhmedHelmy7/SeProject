@@ -21,6 +21,15 @@ var UserSchema=new Schema(
             type:String,
             required:true
         }
+	creditCardNumber :String,
+	fav_list : [{
+   	name: String,
+  	location:String,
+	price:Number,
+   	date: Date
+     	}],
+
+     sub_List:[{name :String}]
         
     }
 );
