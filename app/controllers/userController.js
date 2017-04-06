@@ -27,13 +27,12 @@ let userController={
 
     }
 
-    adminban: function(req, res) {
+    superban:function(req, res) {
 User.findOne({username:req.username},function(err){
   if(err){
      return res.status(500).send();
    }
    else{
-    if(User.isAdmin == false){
      User.isBanned = true;
      // End Session
  User.save(function (err) {
@@ -41,17 +40,41 @@ User.findOne({username:req.username},function(err){
                 res.status(500).send(err)
     }
         });
-         }}
+         }
 })
 });
+promote:function(req, res) {
+User.findOne({username:req.username},function(err){
+  if(err){
+     return res.status(500).send();
+   }
+   else{
+     User.isAdmin = true;
+ User.save(function (err) {
+            if (err) {
+                res.status(500).send(err)
+    }
+        });
+         }
+})
+});
+demote:function(req, res) {
+    
 
-deleteReview:function(id, callback) {
-    var name = { _id: id };
-    var update = {
-        flag: "1"
-    };
-    reviews.findOneAndUpdate(name, update, [], callback);
-}
+User.findOne({username:req.username},function(err){
+  if(err){
+     return res.status(500).send();
+   }
+   else{
+     User.isAdmin = false;
+ User.save(function (err) {
+            if (err) {
+                res.status(500).send(err)
+    }
+        });
+         }
+})
+});
 }
 module.exports=userController;
 
