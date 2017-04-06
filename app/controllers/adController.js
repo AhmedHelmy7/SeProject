@@ -75,7 +75,6 @@ let adController={
       mm='0'+mm;
   }
   var today = dd+'/'+mm+'/'+yyyy;
-  document.getElementById("DATE").value = today;
 
     db.advertisements.find( {},
       function(err,doc){
