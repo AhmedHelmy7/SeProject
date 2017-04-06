@@ -27,8 +27,7 @@ var activitessSchema = mongoose.Schema({
             //  required: true
     },
     desc: {
-        type: String,
-        required: true
+        type: String
     },
     numberOfApplicatons: {
         type: Number,
@@ -83,16 +82,6 @@ module.exports.updateActivity = (id, activity, options, callback) => {
     activities.findOneAndUpdate(query, update, options, callback);
 }
 
-function getEmail(name, callback) {
-    places.find({ name: name }, function(err, objs) {
-        var returnable_name;
-        returnable_name = objs[0].email;
-        //     console.log(returnable_name); // this prints "Renato", as it should
-        callback(returnable_name);
-
-    });
-}
-
 function getPassword(name, callback) {
     places.find({ name: name }, function(err, objs) {
         var returnable_name;
@@ -112,50 +101,47 @@ function getSubs(name, callback) {
 
     });
 }
+
+function getEmail(name, callback) {
+    places.find({ name: name }, function(err, objs) {
+        var returnable_name;
+        returnable_name = objs[0].email;
+        //   console.log(returnable_name); // this prints "Renato", as it should
+        callback(returnable_name);
+
+    });
+}
 var email;
 var password;
 var subs;
 var okok = function(name) {
-
     getEmail(name, function(data) {
-        email = data.toString();
-        console.log(email);
-    });
-    getPassword(name, function(data) {
-        password = data;
-        // console.log(password);
-    });
-    getSubs(name, function(data) {
-        subs = data;
-        console.log(subs);
+        email = data;
+        getPassword(name, function(data) {
+            password = data;
+            getSubs(name, function(data) {
+                subs = data;
+                let HelperOptions = {
+                    from: email,
+                    to: subs,
+                    subject: 'A notification from ' + name,
+                    text: 'Hello , we have a new activity please check our page to get more details about it , Thnaks'
+                };
+
+                let transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    secure: false,
+                    port: 25,
+                    auth: {
+                        user: email,
+                        pass: password
+                    }
+                });
+                transporter.sendMail(HelperOptions, (error, info) => {
+                    if (error) throw error;
+                    console.log('LastButNotLeast')
+                })
+            });
+        });
     });
 }
-
-okok('DavidShokry');
-var postmark = require("postmark");
-var client = new postmark.Client("<server key>");
-
-/*
-var nn = "DavidShokry"
-
-let HelperOptions = {
-    from: '"DavidOnsy123"<DavidOnsy123@gmail.com',
-    to: "DavidOnsy123@gmail.com",
-    subject: 'Done2',
-    text: 'DOne 456'
-};
-
-
-let transporter = nodemailer.createTransport({
-    service: 'gmail',
-    secure: false,
-    port: 25,
-    auth: {
-        user: email + "",
-        pass: "MicoolerBasha123"
-    }
-});
-transporter.sendMail(HelperOptions, (error, info) => {
-    if (error) throw error;
-    console.log('Done Bro5')
-})*/
