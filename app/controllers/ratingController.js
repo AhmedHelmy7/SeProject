@@ -14,9 +14,10 @@ let ratingController = {
                 console.log(rating)
 
                 res.redirect('/'); //b3d may3ml rating hayrg3 le fen
+
+
             }
-        });
+        })
     }
 }
-
 module.exports = ratingController;
