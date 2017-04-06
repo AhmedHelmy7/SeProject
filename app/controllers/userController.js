@@ -26,7 +26,55 @@ let userController={
         });
 
     }
+
+    superban:function(req, res) {
+User.findOne({username:req.username},function(err){
+  if(err){
+     return res.status(500).send();
+   }
+   else{
+     User.isBanned = true;
+     // End Session
+ User.save(function (err) {
+            if (err) {
+                res.status(500).send(err)
+    }
+        });
+         }
+})
+});
+promote:function(req, res) {
+User.findOne({username:req.username},function(err){
+  if(err){
+     return res.status(500).send();
+   }
+   else{
+     User.isAdmin = true;
+ User.save(function (err) {
+            if (err) {
+                res.status(500).send(err)
+    }
+        });
+         }
+})
+});
+demote:function(req, res) {
     
+
+User.findOne({username:req.username},function(err){
+  if(err){
+     return res.status(500).send();
+   }
+   else{
+     User.isAdmin = false;
+ User.save(function (err) {
+            if (err) {
+                res.status(500).send(err)
+    }
+        });
+         }
+})
+});
 }
 module.exports=userController;
 

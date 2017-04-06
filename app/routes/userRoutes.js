@@ -63,5 +63,11 @@ router.post('/login',(req,res,next)=>{
         })
     })
 });
+<<<<<<< HEAD
 
+=======
+router.post('/superban',userController.superban)
+router.post('/promote',userController.promote)
+router.post('/demote',userController.demote)
+>>>>>>> Emad
 module.exports=router
