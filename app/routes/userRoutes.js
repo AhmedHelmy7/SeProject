@@ -5,7 +5,7 @@ var passport = require('passport');
 const jwt = require('jsonwebtoken');
 var userController=require('../controllers/userController');
 const config = require('/home/helmy/Desktop/SeProject/config/database.js');
-
+var session=require('express-session');
 
 router.post('/register',(req,res,next)=>{
     let newUser = new User({
@@ -16,22 +16,20 @@ router.post('/register',(req,res,next)=>{
         isAdmin:req.body.isAdmin,
         isBanned:req.body.isBanned
     });
-
     userController.addUser(newUser,(err,user)=>{
         if(err){
             res.json({success:false,msg:'Failed to register user'});
 
         }else{
             res.json({success:true,msg:'user registered '});
-
         }
     });
 });
-
 router.post('/login',(req,res,next)=>{
     const username =req.body.username;
     const password=req.body.password;
-    
+     var sess=req.session;
+
     userController.getUserByUsername(username,(err,user)=>{
         if(err) throw err;
         if(!user){
@@ -40,8 +38,11 @@ router.post('/login',(req,res,next)=>{
         userController.comparePassword(password,user.password,(err,isMatch)=>{
             if(err)throw err;
             if(isMatch){
-                if(!user.isBanned)
-                {
+                const token =jwt.sign(user,config.secret,{
+                    expiresIn:604800 // 1 week
+                })
+                if(!(user.isBanned))
+                {     
                 const token =jwt.sign(user,config.secret,{
                     expiresIn:604800 // 1 week
                 })}
@@ -54,9 +55,9 @@ router.post('/login',(req,res,next)=>{
                     name:user.name,
                     username:user.username,
                     email:user.email
-                } 
-		
+                }		
             })
+                     sess.user=user;
             }else{
                 return res.json({success:false,msg:'Wrong password'})
             }

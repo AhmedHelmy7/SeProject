@@ -30,9 +30,9 @@ var UserSchema=new Schema(
      	}],
 
      sub_List:[{name :String}],
-     isBanned :{type:Boolean},
-     isAdmin :{type:Boolean},
-     isSuperAdmin:{type:Boolean}
+     isBanned :{type:Boolean,default:false},
+     isAdmin :{type:Boolean,default:false},
+     isSuperAdmin:{type:Boolean,default:false}
     }
 );
 const User=module.exports = mongoose.model('User',UserSchema);

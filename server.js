@@ -5,6 +5,7 @@ const cors=require('cors');
 const passport=require('passport');
 const mongoose=require('mongoose');
 const morgan=require('morgan');
+var session=require('express-session');
 
 mongoose.connect('mongodb://localhost:27017/finalProject',function(err)
 {
@@ -13,13 +14,14 @@ mongoose.connect('mongodb://localhost:27017/finalProject',function(err)
         console.log('not connected')
     }
     else{
+        
         console.log('success on db connection');
     }
 });
 
 const app=express();
 const users=require('../SeProject/app/routes/userRoutes');
-const port=8080;
+const port=8089;
 
 
 //app.use('./users',users);
