@@ -27,31 +27,38 @@ let userController={
 
     }
 
-    adminban: function(req, res) {
-User.findOne({username:req.username},function(err){
-  if(err){
-     return res.status(500).send();
-   }
-   else{
-    if(User.isAdmin == false){
-     User.isBanned = true;
-     // End Session
- User.save(function (err) {
-            if (err) {
-                res.status(500).send(err)
-    }
-        });
-         }}
-})
+adminBan: function(req, res) {
+  User.findOneAndUpdate({username:req.body.username},{isBanned:true},{},function(err, res){
+    // End session
+  if (err) {
+                throw err;
+            } else {
+                console.log('Banned');
+           }
 });
+}
 
-deleteReview:function(id, callback) {
-    var name = { _id: id };
-    var update = {
-        flag: "1"
-    };
-    reviews.findOneAndUpdate(name, update, [], callback);
+adminDeban: function(req, res) {
+if(!req.body.isAdmin)
+  User.findOneAndUpdate({username:req.body.username},{isBanned:false},{},function(err, res){
+    // End session
+  if (err)
+        throw err;
+  else 
+        console.log('Debanned');
+});
 }
+
+
+deleteReview:function(req,res) {
+  reviews.findOneAndRemove({id:req.body.id},{}, function(err, res){
+    // End session
+  if (err)
+        throw err;
+  else 
+        console.log('Debanned');
+});
 }
+
 module.exports=userController;
 

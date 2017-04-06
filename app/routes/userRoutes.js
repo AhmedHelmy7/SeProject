@@ -63,6 +63,7 @@ router.post('/login',(req,res,next)=>{
         })
     })
 });
-router.post('/adminban',userController.adminban)
-router.post('/deletereview',userController.deletereview)
+router.put('/adminban',userController.adminBan);
+router.put('/admindeban',userController.adminDeban);
+router.post('/deleteReview',userController.deleteReview);
 module.exports=router
