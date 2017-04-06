@@ -1,9 +1,34 @@
 {
+<<<<<<< HEAD
   "name": "SeProject",
+=======
+<<<<<<< HEAD
+  "name": "asekon",
+=======
+  "name": "SeProject",
+>>>>>>> master
+>>>>>>> Omar
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "*",
+    "express": "*",
+    "express-session": "^1.15.2",
+    "mongoose": "*",
+    "path": "*"
+  },
+  "author": "",
+  "license": "ISC"
+=======
+>>>>>>> Omar
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -21,4 +46,8 @@
     "passport": "*",
     "passport-jwt": "*"
   }
+<<<<<<< HEAD
+=======
+>>>>>>> master
+>>>>>>> Omar
 }
