@@ -1,31 +1,30 @@
-var express=require('express');
-var app=express();
-var port=process.env.PORT ||8080;
-var morgan=require('morgan');
-var mongoose=require('mongoose');
-var router=express.Router();
+var express = require('express');
+var router = require('./routes/routes');
 var bodyParser = require('body-parser');
-var appRoutes;
-var path=require('path');
-app.use(morgan('dev'));
+var mongoose = require('mongoose');
+var DB_URI = "mongodb://localhost:27017/finalProject";
+var session = require('express-session');
+var app = express();
+
+// configure app
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(__dirname + '/public'));
-mongoose.connect('mongodb://localhost:27017/student',function(err)
-{
-    if(err)
-    {
-        console.log('not connected')
+app.use(session({ secret: "ronaldo", resave: false, saveUninitialized: true }));
+
+mongoose.connect(DB_URI, function(err) {
+    if (err) {
+        console.log('not');
+    } else {
+        console.log('conn');
     }
-    else{
-        console.log('success');
-    }
 });
-app.get('*',function(req,res)
-{
-});
-app.listen(port,function()
-{
-    console.log('Running on port '+port);
-});
-//27017q
+app.use('/', router);
+
+// start the server
+app.listen(8091, function() {
+    console.log("server is listening on port 8091");
+})
