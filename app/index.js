@@ -62,7 +62,7 @@ app.get('/',function(req,res){
     sess.password; 
 });
 //edit profile 
-app.post('/editProfile.html',function(req, res) {
+app.post('/editProfile',function(req, res) {
 	
 
   var username=req.body.username;
