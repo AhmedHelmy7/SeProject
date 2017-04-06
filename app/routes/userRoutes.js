@@ -4,7 +4,7 @@ var User=require('../models/user');
 var passport = require('passport');
 const jwt = require('jsonwebtoken');
 var userController=require('../controllers/userController');
-const config = require('/home/yehia/Desktop/SeProject/config/database.js');
+const config = require('/home/helmy/Desktop/SeProject/config/database.js');
 
 
 router.post('/register',(req,res,next)=>{
@@ -12,7 +12,9 @@ router.post('/register',(req,res,next)=>{
         name:req.body.name,
         email:req.body.email,
         username:req.body.username,
-        password:req.body.password
+        password:req.body.password,
+        isAdmin:req.body.isAdmin,
+        isBanned:req.body.isBanned
     });
 
     userController.addUser(newUser,(err,user)=>{
@@ -38,16 +40,22 @@ router.post('/login',(req,res,next)=>{
         userController.comparePassword(password,user.password,(err,isMatch)=>{
             if(err)throw err;
             if(isMatch){
+                if(!user.isBanned)
+                {
                 const token =jwt.sign(user,config.secret,{
                     expiresIn:604800 // 1 week
-                })
+                })}
+                else{
+                    return res.json({success:false,msg:'You are banned from the server'})
+                }
 
                 res.json({success:true,token:'JWT '+token,user:{
                     id:user._id,
                     name:user.name,
                     username:user.username,
                     email:user.email
-                }
+                } 
+		
             })
             }else{
                 return res.json({success:false,msg:'Wrong password'})

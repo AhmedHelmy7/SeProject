@@ -20,8 +20,8 @@ var UserSchema=new Schema(
         password:{
             type:String,
             required:true
-        }
-	creditCardNumber :String,
+        },
+	creditCardNumber :{type:String},
 	fav_list : [{
    	name: String,
   	location:String,
@@ -29,13 +29,11 @@ var UserSchema=new Schema(
    	date: Date
      	}],
 
-     sub_List:[{name :String}]
-        
+     sub_List:[{name :String}],
+     isBanned :{type:Boolean},
+     isAdmin :{type:Boolean},
+     isSuperAdmin:{type:Boolean}
     }
 );
-<<<<<<< HEAD
-const User=module.exports = mongoose.model('User',UserSchema);
-=======
 const User=module.exports = mongoose.model('User',UserSchema);
 
->>>>>>> master

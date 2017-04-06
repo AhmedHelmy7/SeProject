@@ -28,9 +28,5 @@ let userController={
     }
     
 }
-<<<<<<< HEAD
-module.exports=userController;
-=======
 module.exports=userController;
 
->>>>>>> master

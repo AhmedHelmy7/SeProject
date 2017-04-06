@@ -26,7 +26,7 @@ const port=8080;
 
 app.use(cors());
 app.use(express.static(__dirname + '/public'));
-
+app.use(session({secret:"ronaldo",resave:false,saveUninitialized:true}));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
