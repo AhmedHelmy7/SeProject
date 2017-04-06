@@ -4,13 +4,26 @@ var bcrypt=require('bcryptjs');
 var UserSchema=new Schema(
     {   
         name:{
-            type:String
+            type:String,
+             required: true
         },
         email:{
             type:String,
             required:true,
             lowercase:true,unique:true
         },
+         category: {
+        type: String,
+        required: true
+    },
+     location: {
+        type: String
+    },
+    subs: {
+        type: [String],
+        //i make it as  a default
+        default: ["teamnamepending123456@gmail.com", "davidonsy123@gmail.com", "david.abdelmalak@student.guc.edu.eg"]
+    },
         username:{
             type:String,
             lowercase:true,
