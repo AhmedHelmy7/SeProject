@@ -25,56 +25,62 @@ let userController={
             callback(null,isMatch);
         });
 
-    }
+    },
 
     superban:function(req, res) {
-User.findOne({username:req.username},function(err){
-  if(err){
-     return res.status(500).send();
-   }
-   else{
-     User.isBanned = true;
-     // End Session
- User.save(function (err) {
-            if (err) {
-                res.status(500).send(err)
-    }
-        });
-         }
-})
+User.findOneAndUpdate({username:req.body.username},{isBanned:true},{},function(err, res){
+    // End session
+  if (err) {
+                throw err;
+            } else {
+                console.log('Banned');
+           }
 });
+},
+superdeban:function(req, res) {
+User.findOneAndUpdate({username:req.body.username},{isBanned:false},{},function(err, res){
+    // End session
+  if (err) {
+                throw err;
+            } else {
+                console.log('Debanned');
+           }
+});
+},
 promote:function(req, res) {
-User.findOne({username:req.username},function(err){
-  if(err){
-     return res.status(500).send();
-   }
-   else{
-     User.isAdmin = true;
- User.save(function (err) {
-            if (err) {
-                res.status(500).send(err)
-    }
-        });
-         }
-})
+User.findOneAndUpdate({username:req.body.username},{isAdmin:true},{},function(err, res){
+  if (err) {
+                throw err;
+            } else {
+                console.log('Promoted');
+           }
 });
+},
 demote:function(req, res) {
     
 
-User.findOne({username:req.username},function(err){
-  if(err){
-     return res.status(500).send();
-   }
-   else{
-     User.isAdmin = false;
- User.save(function (err) {
-            if (err) {
-                res.status(500).send(err)
-    }
-        });
-         }
-})
+User.findOneAndUpdate({username:req.body.username},{isAdmin:false},{},function(err, res){
+  if (err) {
+                throw err;
+            } else {
+                console.log('Demoted');
+           }
 });
+}
 }
 module.exports=userController;
 
+//updateActivity: (req, res) => {
+//        var id = req.params.username;
+//        var query = { username: username };
+//        var update = {
+//            isAdmin = false,
+//        }
+//        Activity.findOneAndUpdate(query, update, {}, function(err, res) {
+//            if (err) {
+//                throw err;
+//            } else {
+//                console.log('Updated');
+//            }
+//        });
+//    }
