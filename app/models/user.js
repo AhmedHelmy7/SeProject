@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-{saddsasd}
-=======
+
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt=require('bcryptjs');
@@ -53,4 +51,3 @@ var UserSchema=new Schema(
 );
 const User=module.exports = mongoose.model('User',UserSchema);
 
->>>>>>> master

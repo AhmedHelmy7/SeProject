@@ -18,6 +18,6 @@ var ratingSchema = mongoose.Schema({
     }
 });
 
-var Rating=mongoose.model("rating",ratingSchema);
+var Rating=mongoose.model("ratings",ratingSchema);
 
 module.exports=Rating;

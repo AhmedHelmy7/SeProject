@@ -2,7 +2,7 @@ let Activity = require('../models/Activity');
 var nodemailer = require('nodemailer');
 var bodyParser = require('body-parser');
 
-var User = require('../models/User');
+var User = require('../models/user');
 
 "use strict"
 let activitiesController = {
@@ -32,10 +32,14 @@ let activitiesController = {
         });
     },
     addActivities: function(req, res) {
+        console.log("enters addActivities")
+        var Activ = new Activity({
+            companyName:req.body.companyName,
+            Name:req.body.Name,
+            numberOfApplicatons:req.body.numberOfApplicatons
+        });
 
-        var Activ = new Activity;
-
-        Activ.companyName = req.params.name;
+        //Activ.companyName = req.body.CompanyName
 
 
         Activ.Name = req.body.Name;
@@ -43,9 +47,9 @@ let activitiesController = {
         Activ.StartDate = req.body.StartDate
 
         Activ.EndDate = req.body.EndDate
-
-        Activ.desc = req.body.desc
-        Activ.numberOfApplicatons = req.body.numberOfApplicatons;
+        Activ.avgRating=req.body.avgRating;
+       Activ.desc = req.body.desc
+       Activ.numberOfApplicatons = req.body.numberOfApplicatons;
 
         Activity.create(Activ, function(err, acc) {
             if (err) {
@@ -105,17 +109,18 @@ let activitiesController = {
         //console.log(places.find(category));       
         //activities.find({ companyName: companyName, flag: "0" }, callback);
     },
+    //A function that finds the top rated activities and storts them by avgRating
     getTopRatedActivities: function(req, res) {
 
-
+        console.log("calls getTopRatedActivities")
         Activity.find(function(err, activities) {
             if (err) {
                 res.send(err.message);
                 console.log(err);
             } else {
-                console.log(rating)
-                res.send(activities);
-                res.redirect('/'); //b3d may3ml rating hayrg3 le fen
+                console.log(activities)
+                res.json(activities);
+               // res.redirect('/'); //b3d may3ml rating hayrg3 le fen
             }
         }).sort({ avgRating: -1 });
     }

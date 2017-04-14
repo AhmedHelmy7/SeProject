@@ -11,6 +11,7 @@ let ratingController = {
                 res.send(err.message);
                 console.log(err);
             } else {
+                
                 console.log(rating)
 
                 res.redirect('/'); //b3d may3ml rating hayrg3 le fen
