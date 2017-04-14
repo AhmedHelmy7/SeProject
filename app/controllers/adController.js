@@ -4,37 +4,36 @@ var db = mongojs('finalProject', ['companies','advertisements','activites']);
 
 let adController={
   createAd:function(req,res) {
-   var n =0;
+    var n =0;
     var newlink = req.body.newlink;
     var company = req.body.company;
     var duration = req.body.duration;
     var newAd = { link: newlink,
       duration : duration}
 
-    db.advertisements.insert(newAd,function(err,result){
-      if(err){
-        res.render('errorPage' , { error: err});}
-        console.log(err);
-      });
 
-    db.company.count({}, function(err, c) {
-
-   db.company.find({}, function(err,doc)
+    db.companies.count({}, function(err, c) {
+      console.log(c);
+      db.companies.find({}, function(err,doc)
     {
      for(var i=0;i<c;i++)
      {
 
-       n= n+ docs[i].advertisements.length;
+       n= n+ doc[i].ads.length;
      }
-   })
+    })})
 
-  if(n<5) //how many ads will we have?
-  {
+    if(n<15) //how many ads will we have?
+    {
 
-  db.company.findOne(
-    {Company_name : company},
+    db.companies.findOne(
+    {Company_name : req.body.company},
       function(err,doc){
-        var curlist = doc.advertisements
+        console.log(doc);
+        if(doc.ads != null){
+        var curlist = doc.ads
+      }
+      else {  var curlist = []};
         curlist.push(newlink)
 
         db.companies.findAndModify({
@@ -43,27 +42,33 @@ let adController={
           new: true
         }, function (err, doc, lastErrorObject) {
 
-        db.advertisements.insert(newlink,function(err,result){
+    if(err) {
+
+
+    res.render('profile' , {
+      company:doc,
+      error: "we dont currently have an empty place for your ad :("
+    });
+
+
+      }  else {
+
+        var newnewlink = {link : newlink,  duration : duration};
+        db.advertisements.insert(newnewlink,function(err,result){
 
           res.render('profile' , {
             company:company // not sure what to pass for profile yet.
           });
         })
+      }
       })
-
-      })
-
-    } else {
-      res.render('profile' , {
-        company:doc,
-        error: "we dont currently have an empty place for your ad :("
-      });
+    })
     }
-
-    });
   },
+
+
   getAllAds:function(req,res) {
-    var today = new Date();
+  var today = new Date();
   var dd = today.getDate();
   var mm = today.getMonth()+1; //January is 0
 

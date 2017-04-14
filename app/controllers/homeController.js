@@ -5,35 +5,29 @@ var db = mongojs('finalProject', ['companies','advertisements','activites']);
 let homeController={
   search:function(req,res) {
 
- req.checkBody('Search_bar', 'Please enter a search word').notEmpty();
- var errors = req.validationErrors();
- if(errors){
-   res.render('errorPage' , {error: errors });
- }
- else {
- var Search_bar = req.Search_bar;
- db.activites.find( {activity_Name : Search_bar},
- function(err,doc_activity){
- //db.companies.find({},function(err,doc_company){
-   //  var returnedCompanies= [];
-   //  var companyLength = doc_company.activity_id.length;
-     var activitiesLength = doc_activity.length;
-   //  for (var i = 0; i < companyLength; i++) {
-   //    for (var j = 0; j<activitiesLength; j++)
-   //    {
-     //    if (doc_company.activity_id[i]==doc_activity[j])
-     //    {
-       //      returnedCompanies.push(doc_company[i]);
-       //  }
-     //  }}
-       res.render('mainPage',
-                 {
-                     activity:doc_activity
-                 });
- //})
- })
- }
+    req.checkBody('Search_bar', 'Please enter a search word').notEmpty();
+    var errors = req.validationErrors();
+    if(errors){
+      res.render('errorPage' , {error: errors });
+    }
+    else {
+    var Search_bar = req.body.Search_bar;
+    console.log(Search_bar);
+    db.activities.find( {activity_name : Search_bar},
+    function(err,doc_activity){
+
+        var activitiesLength = doc_activity.length;
+
+        console.log(doc_activity);
+
+          res.render('mainPage',
+                    {
+                        activity:doc_activity
+                    });
+    })
+    }
  },
+
  filter:function(req,res){
    var User_location = req.body.User_location;
 

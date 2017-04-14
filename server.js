@@ -5,6 +5,8 @@ const cors=require('cors');
 const passport=require('passport');
 const mongoose=require('mongoose');
 const morgan=require('morgan');
+const expressValidator = require('express-validator');
+
 
 mongoose.connect('mongodb://localhost:27017/finalProject',function(err)
 {
@@ -21,7 +23,23 @@ const app=express();
 const users=require('../SeProject/app/routes/userRoutes');
 const port=8080;
 
+//express valiator Middleware
+app.use(expressValidator({
+  errorFormatter: function(param, msg, value) {
+      var namespace = param.split('.')
+      , root = namespace.shift()
+      , formParam = root;
 
+    while(namespace.length) {
+      formParam += '[' + namespace.shift() + ']';
+    }
+    return {
+      param : formParam,
+      msg   : msg,
+      value : value
+    };
+  }
+}));
 //app.use('./users',users);
 
 app.use(cors());

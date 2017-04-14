@@ -18,6 +18,7 @@
     "jsonwebtoken":"*",
     "passport":"*",
     "passport-jwt":"*",
+    "angular":"*",
     "morgan":"*"
   }
 }

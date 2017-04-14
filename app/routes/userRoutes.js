@@ -31,7 +31,7 @@ router.post('/register',(req,res,next)=>{
 router.post('/login',(req,res,next)=>{
     const username =req.body.username;
     const password=req.body.password;
-    
+
     userController.getUserByUsername(username,(err,user)=>{
         if(err) throw err;
         if(!user){
@@ -54,8 +54,8 @@ router.post('/login',(req,res,next)=>{
                     name:user.name,
                     username:user.username,
                     email:user.email
-                } 
-		
+                }
+
             })
             }else{
                 return res.json({success:false,msg:'Wrong password'})
