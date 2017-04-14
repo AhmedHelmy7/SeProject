@@ -8,7 +8,7 @@ const cors=require('cors');
 const passport=require('passport');
 const morgan=require('morgan');
 var session=require('express-session');
-var app = express();
+const app = express();
 
 // configure app
 app.use(bodyParser.urlencoded({
@@ -44,7 +44,6 @@ mongoose.connect('mongodb://localhost:27017/finalProject',function(err)
     }
 });
 
-const app=express();
 const users=require('../SeProject/app/routes/userRoutes');
 const port=8089;
 
