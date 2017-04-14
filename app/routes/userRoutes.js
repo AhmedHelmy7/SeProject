@@ -63,5 +63,8 @@ router.post('/login',(req,res,next)=>{
         })
     })
 });
-
+router.put('/superban',userController.superban);
+router.put('/superdeban',userController.superdeban);
+router.put('/promote',userController.promote);
+router.put('/demote',userController.demote);
 module.exports=router
