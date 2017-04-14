@@ -32,7 +32,7 @@ let activitiesController = {
         });
     },
     addActivities: function(req, res) {
-        console.log("enters addActivities")
+        //console.log("enters addActivities")
         var Activ = new Activity({
             companyName:req.body.companyName,
             Name:req.body.Name,
@@ -122,7 +122,7 @@ let activitiesController = {
                 res.json(activities);
                // res.redirect('/'); //b3d may3ml rating hayrg3 le fen
             }
-        }).sort({ avgRating: -1 });
+        }).sort({ avgRating: -1 }).limit(5);
     }
 
 }

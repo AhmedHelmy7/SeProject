@@ -31,10 +31,10 @@ router.put('/:_id', activitiesController.updateActivity);
 
 //getCOMMENTS
 //router.get('/:_reviewID/comments', commentController.getComments);
-
+//routing to call the get getTopRatedActivities function
 router.post('/top', activitiesController.getTopRatedActivities);
-
-router.post('/createrating/', ratingController.addRating);
+//routing to add a new rating
+router.post('/createrating', ratingController.addRating);
 
 // export router
 module.exports = router;

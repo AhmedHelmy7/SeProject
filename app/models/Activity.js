@@ -36,7 +36,11 @@ var ActivitySchema = new Schema({
     ratings: [{
         type: Schema.ObjectId,
         ref: 'rating' //could be like this or ratingSchema
-    }]
+    }],
+    numberOfRatings:{
+        type:Number,
+        default:1
+    }
 
 });
 const Activity = module.exports = mongoose.model('activities', ActivitySchema);
