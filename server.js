@@ -19,7 +19,7 @@ mongoose.connect('mongodb://localhost:27017/finalProject',function(err)
 
 const app=express();
 const users=require('../SeProject/app/routes/userRoutes');
-const port=8085;
+const port=8070;
 
 
 //app.use('./users',users);

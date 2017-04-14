@@ -40,6 +40,9 @@ router.post('/login',(req,res,next)=>{
         userController.comparePassword(password,user.password,(err,isMatch)=>{
             if(err)throw err;
             if(isMatch){
+                 const token =jwt.sign(user,config.secret,{
+                    expiresIn:604800 // 1 week
+                })
                 if(!user.isBanned)
                 {
                 const token =jwt.sign(user,config.secret,{
