@@ -8,6 +8,10 @@ const morgan=require('morgan');
 var router = require('./routes/routes');
 var DB_URI = "mongodb://localhost:27017/finalProject";
 var session=require('express-session');
+const app=express();
+const users=require('../SeProject/app/routes/userRoutes');
+const port=8097;
+
 // configure app
 app.use(bodyParser.urlencoded({
     extended: true
@@ -30,9 +34,6 @@ mongoose.connect('mongodb://localhost:27017/finalProject',function(err)
     }
 });
 
-const app=express();
-const users=require('../SeProject/app/routes/userRoutes');
-const port=8070;
 
 
 //app.use('./users',users);
