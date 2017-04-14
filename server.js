@@ -3,7 +3,11 @@ var router = require('./routes/routes');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var DB_URI = "mongodb://localhost:27017/finalProject";
-
+const path=require('path');
+const cors=require('cors');
+const passport=require('passport');
+const morgan=require('morgan');
+var session=require('express-session');
 var app = express();
 
 // configure app
@@ -26,15 +30,7 @@ app.use('/', router);
 // start the server
 app.listen(8095, function() {
     console.log("server is listening on port 8095");
-})
-const express=require('express');
-const path=require('path');
-const bodyParser = require('body-parser');
-const cors=require('cors');
-const passport=require('passport');
-const mongoose=require('mongoose');
-const morgan=require('morgan');
-var session=require('express-session');
+});
 
 mongoose.connect('mongodb://localhost:27017/finalProject',function(err)
 {
