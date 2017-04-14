@@ -5,7 +5,20 @@ const cors=require('cors');
 const passport=require('passport');
 const mongoose=require('mongoose');
 const morgan=require('morgan');
+var router = require('./routes/routes');
+var DB_URI = "mongodb://localhost:27017/finalProject";
 var session=require('express-session');
+// configure app
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
+app.use(bodyParser.json());
+app.use(express.static(__dirname + '/public'));
+
+app.use('/', router);
+
+// start the server
 mongoose.connect('mongodb://localhost:27017/finalProject',function(err)
 {
     if(err)

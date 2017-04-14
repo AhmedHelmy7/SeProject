@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 var userController=require('../controllers/userController');
 const config = require('/home/helmy/Desktop/SeProject/config/database.js');
 
+var session=require('express-session');
 
 router.post('/register',(req,res,next)=>{
     let newUser = new User({
@@ -28,10 +29,12 @@ router.post('/register',(req,res,next)=>{
     });
 });
 
+
 router.post('/login',(req,res,next)=>{
     const username =req.body.username;
     const password=req.body.password;
-    
+     var sess=req.session;
+
     userController.getUserByUsername(username,(err,user)=>{
         if(err) throw err;
         if(!user){
@@ -58,7 +61,7 @@ router.post('/login',(req,res,next)=>{
                     username:user.username,
                     email:user.email
                 } 
-		
+			
             })
             }else{
                 return res.json({success:false,msg:'Wrong password'})
