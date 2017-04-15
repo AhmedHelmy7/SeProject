@@ -30,7 +30,7 @@ var UserSchema=new Schema(
             required:true,
             unique:true
         },
-        ads {
+        ads :{
           type:String
         },
         password:{
