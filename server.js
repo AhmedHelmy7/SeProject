@@ -39,6 +39,9 @@ require('./config/passport')(passport);
 app.use('/activities', activityroutes);
 app.use('/users', users);
 
+app.get('*', function(req, res) {
+    res.sendfile('./public/views/index.html'); // load our public/index.html file
+});
 
 app.listen(port,function()
 {
