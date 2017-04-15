@@ -27,7 +27,7 @@ const port=8080;
 //app.use('./users',users);
 
 app.use(cors());
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public')); // to make frontend access the public folder
 app.use(session({secret:"ronaldo",resave:false,saveUninitialized:true}));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
@@ -46,3 +46,7 @@ app.listen(port,function()
     console.log('Running on port '+port);
 });
 //27017q
+
+app.get('*',function(req,res){
+	res.sendFile(path.join(__dirname + '/public/app/views/index.html')); //respond to the route request with the html file.
+});
