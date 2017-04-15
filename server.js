@@ -7,7 +7,27 @@ const mongoose=require('mongoose');
 const morgan=require('morgan');
 const expressValidator = require('express-validator');
 
+var DB_URI = "mongodb://localhost:27017/finalProject";
+var session=require('express-session');
+const app=express();
+const users=require('../SeProject/app/routes/userRoutes');
+const ads=require('../SeProject/app/routes/adRoutes');
+const main=require('../SeProject/app/routes/mainRouter');
+const port=8097;
 
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname,'views'));
+// configure app
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
+app.use(bodyParser.json());
+//app.use(express.static(__dirname + '/public'));
+
+
+
+// start the server
 mongoose.connect('mongodb://localhost:27017/finalProject',function(err)
 {
     if(err)
@@ -19,9 +39,6 @@ mongoose.connect('mongodb://localhost:27017/finalProject',function(err)
     }
 });
 
-const app=express();
-const users=require('../SeProject/app/routes/userRoutes');
-const port=8080;
 
 //express valiator Middleware
 app.use(expressValidator({
@@ -44,7 +61,7 @@ app.use(expressValidator({
 
 app.use(cors());
 app.use(express.static(__dirname + '/public'));
-app.use(session({secret:"ronaldo",resave:false,saveUninitialized:true}));
+//app.use(session({secret:"ronaldo",resave:false,saveUninitialized:true}));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -52,7 +69,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 require('./config/passport')(passport);
 app.use('/users',users);
-
+app.use('/ads',ads);
+app.use('/main',main);
 
 app.get('/',function(req,res)
 {

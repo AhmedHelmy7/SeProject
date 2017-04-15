@@ -1,9 +1,11 @@
 var expressValidator = require('express-validator');
 var mongojs = require('mongojs');
 var db = mongojs('finalProject', ['companies','advertisements','activites']);
+var bodyParser = require('body-parser');
+var mongoose=require('mongoose');
 
 let adController={
-  createAd:function(req,res) {
+  createad:function(req,res) {
     var n =0;
     var newlink = req.body.newlink;
     var company = req.body.company;
@@ -12,21 +14,21 @@ let adController={
       duration : duration}
 
 
-    db.companies.count({}, function(err, c) {
+    user.count({}, function(err, c) {
       console.log(c);
-      db.companies.find({}, function(err,doc)
+      user.find({}, function(err,doc)
     {
      for(var i=0;i<c;i++)
      {
 
        n= n+ doc[i].ads.length;
      }
-    })})
+   })})
 
-    if(n<15) //how many ads will we have?
-    {
+  if(n<15) //how many ads will we have?
+  {
 
-    db.companies.findOne(
+  user.findOne(
     {Company_name : req.body.company},
       function(err,doc){
         console.log(doc);
@@ -36,13 +38,13 @@ let adController={
       else {  var curlist = []};
         curlist.push(newlink)
 
-        db.companies.findAndModify({
+        user.findAndModify({
           query:{Company_name : company},
           update: {$set: {ads : curlist}},
           new: true
         }, function (err, doc, lastErrorObject) {
 
-    if(err) {
+  if(err) {
 
 
     res.render('profile' , {
@@ -54,21 +56,27 @@ let adController={
       }  else {
 
         var newnewlink = {link : newlink,  duration : duration};
-        db.advertisements.insert(newnewlink,function(err,result){
+      ads.insert(newnewlink,function(err,result){
 
-          res.render('profile' , {
-            company:company // not sure what to pass for profile yet.
-          });
+        //  res.render('profile' , {
+      //      company:company // not sure what to pass for profile yet.
+    //      });
         })
+
+
       }
+
       })
+
+
+
     })
-    }
+  }
   },
 
 
   getAllAds:function(req,res) {
-  var today = new Date();
+    var today = new Date();
   var dd = today.getDate();
   var mm = today.getMonth()+1; //January is 0
 
@@ -81,11 +89,11 @@ let adController={
   }
   var today = dd+'/'+mm+'/'+yyyy;
 
-    db.advertisements.find( {},
+    ads.find( {},
       function(err,doc){
   if(doc.duration == today)
   {
-    db.advertisements.dropIndex(
+  ads.dropIndex(
       {duration : today},
         function(err,doc){
   })
