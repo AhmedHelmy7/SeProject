@@ -5,7 +5,7 @@ const cors=require('cors');
 const passport=require('passport');
 const mongoose=require('mongoose');
 const morgan=require('morgan');
-var router = require('./routes/routes');
+var router = require('/home/helmy/Desktop/SeProject/app/routes/routes.js');
 var DB_URI = "mongodb://localhost:27017/finalProject";
 var session=require('express-session');
 const app=express();
@@ -37,7 +37,6 @@ mongoose.connect('mongodb://localhost:27017/finalProject',function(err)
 
 
 
-const users=require('../SeProject/app/routes/userRoutes');
 //app.use('./users',users);
 
 app.use(cors());
