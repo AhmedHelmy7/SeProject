@@ -18,6 +18,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(bodyParser.json());
+
 app.use(express.static(__dirname + '/public'));
 
 app.use('/', router);
@@ -36,6 +37,7 @@ mongoose.connect('mongodb://localhost:27017/finalProject',function(err)
 
 
 
+const users=require('../SeProject/app/routes/userRoutes');
 //app.use('./users',users);
 
 app.use(cors());

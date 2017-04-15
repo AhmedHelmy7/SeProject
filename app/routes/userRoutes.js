@@ -63,14 +63,16 @@ router.post('/login',(req,res,next)=>{
                 } 
 			
             })
-            }else{
+             }else{
                 return res.json({success:false,msg:'Wrong password'})
             }
-        })
-    })
+        })		
+            })
+                     sess.user=user;
 });
 router.put('/superban',userController.superban);
 router.put('/superdeban',userController.superdeban);
 router.put('/promote',userController.promote);
 router.put('/demote',userController.demote);
 module.exports=router
+
