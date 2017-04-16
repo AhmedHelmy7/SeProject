@@ -5,11 +5,12 @@ const cors=require('cors');
 const passport=require('passport');
 const mongoose=require('mongoose');
 const morgan=require('morgan');
-var router = require('/home/helmy/Desktop/SeProject/app/routes/routes.js');
+var reviewrouter = require('./app/routes/reviewRoutes');
 var DB_URI = "mongodb://localhost:27017/finalProject";
 var session=require('express-session');
 const app=express();
 const users=require('../SeProject/app/routes/userRoutes');
+const activityroutes = require('./app/routes/activityRoutes');
 const port=8097;
 
 // configure app
@@ -21,7 +22,7 @@ app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/public'));
 
-app.use('/', router);
+
 
 // start the server
 mongoose.connect('mongodb://localhost:27017/finalProject',function(err)
@@ -48,8 +49,9 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(passport.initialize());
 app.use(passport.session());
 require('./config/passport')(passport);
+app.use('/activities', activityroutes);
 app.use('/users',users);
-
+app.use('/review', reviewrouter);
 
 app.get('/',function(req,res)
 {
