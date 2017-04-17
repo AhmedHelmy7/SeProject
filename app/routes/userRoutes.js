@@ -74,5 +74,11 @@ router.put('/superban',userController.superban);
 router.put('/superdeban',userController.superdeban);
 router.put('/promote',userController.promote);
 router.put('/demote',userController.demote);
+
+router.put('/editProfile/:id',userController.editProfile);
+
+router.put('/ addToFavourites/:id',userController.addToFavourites);
+
+router.put('/getSubList/:id',userController.getSubList);
 module.exports=router
 
