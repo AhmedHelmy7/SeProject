@@ -3,8 +3,8 @@ var router =express.Router();
 var User=require('../models/user');
 var passport = require('passport');
 const jwt = require('jsonwebtoken');
-var userController=require('../controllers/userController.js');
-const config = require('../../config/database.js');
+var userController=require('../controllers/userController');
+const config = require('/home/anas/Desktop/SeProject-Anas/config/database.js');
 
 
 router.post('/register',(req,res,next)=>{
@@ -31,7 +31,7 @@ router.post('/register',(req,res,next)=>{
 router.post('/login',(req,res,next)=>{
     const username =req.body.username;
     const password=req.body.password;
-    
+
     userController.getUserByUsername(username,(err,user)=>{
         if(err) throw err;
         if(!user){
@@ -54,8 +54,8 @@ router.post('/login',(req,res,next)=>{
                     name:user.name,
                     username:user.username,
                     email:user.email
-                } 
-		
+                }
+
             })
             }else{
                 return res.json({success:false,msg:'Wrong password'})
@@ -63,7 +63,5 @@ router.post('/login',(req,res,next)=>{
         })
     })
 });
-router.put('/adminban',userController.adminBan);
-router.put('/admindeban',userController.adminDeban);
-router.post('/deleteReview',userController.deleteReview);
+
 module.exports=router

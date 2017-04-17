@@ -25,40 +25,8 @@ let userController={
             callback(null,isMatch);
         });
 
-    },
-
-adminBan:function(req, res) {
-  User.findOneAndUpdate({username:req.body.username},{isBanned:true},{},function(err, res){
-    // End session
-  if (err) {
-                throw err;
-            } else {
-                console.log('Banned');
-           }
-});
-},
-
-adminDeban:function(req, res) {
-if(!req.body.isAdmin)
-  User.findOneAndUpdate({username:req.body.username},{isBanned:false},{},function(err, res){
-    // End session
-  if (err)
-        throw err;
-  else 
-        console.log('Debanned');
-});
-},
-
-
-deleteReview:function(req,res) {
-  reviews.findOneAndRemove({id:req.body.id},{}, function(err, res){
-    // End session
-  if (err)
-        throw err;
-  else 
-        console.log('Debanned');
-});
-}
+    }
+    
 }
 module.exports=userController;
 
