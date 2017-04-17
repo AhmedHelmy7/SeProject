@@ -1,6 +1,6 @@
 let User=require('../models/user');
 let bcrypt =require('bcryptjs');
-
+var temp;
 let userController={
     getUserById:function(id,callback){
         User.findById(id,callback);
@@ -30,7 +30,9 @@ let userController={
     },
 
     superban:function(req, res) {
-    User.findOneAndUpdate({username:req.body.username},{isBanned:true},{},function(err, res){
+        if(temp.isSuperAdmin)
+        {
+         User.findOneAndUpdate({username:req.body.username},{isBanned:true},{},function(err, res){
         // End session
     if (err) {
                     throw err;
@@ -38,9 +40,15 @@ let userController={
                     console.log('Banned');
             }
     });
+        }
+        else{
+            console.log('you are not an admin');
+        }
     },
     superdeban:function(req, res) {
-    User.findOneAndUpdate({username:req.body.username},{isBanned:false},{},function(err, res){
+    if(temp.isSuperAdmin)
+    {
+ User.findOneAndUpdate({username:req.body.username},{isBanned:false},{},function(err, res){
         // End session
     if (err) {
                     throw err;
@@ -48,28 +56,97 @@ let userController={
                     console.log('Debanned');
             }
     });
+    }
+    else{
+                 console.log('you are not an admin');
+    }
     },
     promote:function(req, res) {
-    User.findOneAndUpdate({username:req.body.username},{isAdmin:true},{},function(err, res){
+    if(temp.isSuperAdmin)
+    {
+         User.findOneAndUpdate({username:req.body.username},{isAdmin:true},{},function(err, res){
     if (err) {
                     throw err;
                 } else {
                     console.log('Promoted');
             }
     });
+    }
+    else{
+              console.log('you are not an admin');
+
+        }
+
     },
     demote:function(req, res) {
-        
-
-        User.findOneAndUpdate({username:req.body.username},{isAdmin:false},{},function(err, res){
+            if(temp.isSuperAdmin)
+            {
+                User.findOneAndUpdate({username:req.body.username},{isAdmin:false},{},function(err, res){
             if (err) {
                             throw err;
                         } else {
                             console.log('Demoted');
                     }
         });
+            }
+            else{
+              console.log('you are not an admin');
+
+            }
+
+        
 
     },
+    adminBan:function(req, res) {
+    if(temp.isAdmin)
+    {
+        User.findOneAndUpdate({username:req.body.username},{isBanned:true},{},function(err, res){
+    // End session
+  if (err) {
+                throw err;
+            } else {
+                console.log('Banned');
+           }
+});
+    }
+    else{
+        console.log("You are not an admin");
+    }
+  
+},
+
+adminDeban:function(req, res) {
+if(temp.isAdmin)
+{
+  User.findOneAndUpdate({username:req.body.username},{isBanned:false},{},function(err, res){
+    // End session
+  if (err)
+        throw err;
+  else 
+        console.log('Debanned');
+});
+}
+else{
+    console.log("You are not an admin");
+}
+},
+
+
+deleteReview:function(req,res) {
+    if(temp.isAdmin)
+    {
+  reviews.findOneAndRemove({id:req.body.id},{}, function(err, res){
+    // End session
+  if (err)
+        throw err;
+  else 
+        console.log('Debanned');
+});
+    }
+    else{
+        console.log("You are not an admin");
+    }
+},
      editProfile:function(req,res){
      
       User.findById(req.params.id,function(err,user){
@@ -141,7 +218,7 @@ let userController={
 
     },
     getProfile:function(req,res,next){
-        
+        temp=req.user;
         res.json({user:req.user});
     }
 

@@ -13,9 +13,8 @@ var UserSchema=new Schema(
             lowercase:true,unique:true
         },
          category: {
-        type: String,
-        required: true
-    },
+        type: String    
+                    },
      location: {
         type: String
     },
@@ -43,12 +42,12 @@ var UserSchema=new Schema(
      	}],
 
      sub_List:[{name :String}],
-     isBanned :{type:Boolean},
-         /*,default:false},*/
-     isAdmin :{type:Boolean},
-         /*,default:false},*/
-     isSuperAdmin:{type:Boolean}
-         /*,default:false},*/
+     isBanned :{type:Boolean
+         ,default:false},
+     isAdmin :{type:Boolean
+         ,default:false},
+     isSuperAdmin:{type:Boolean
+         ,default:false}
     }
 );
 const User=module.exports = mongoose.model('User',UserSchema);

@@ -5,8 +5,8 @@ var passport = require('passport');
 const jwt = require('jsonwebtoken');
 var userController=require('../controllers/userController');
 const config = require('../../config/database.js');
-
 var session=require('express-session');
+var flag=false;
 
 router.post('/register',(req,res,next)=>{
     let newUser = new User({
@@ -31,6 +31,8 @@ router.post('/register',(req,res,next)=>{
 
 
 router.post('/login',(req,res,next)=>{
+    if(!flag)
+    {
     const username =req.body.username;
     const password=req.body.password;
      //var sess=req.session;
@@ -46,6 +48,7 @@ router.post('/login',(req,res,next)=>{
                  
                 if(!user.isBanned)
                 {
+                    flag=true;
                     const token =jwt.sign(user,config.secret,{
                         expiresIn:604800 // 1 week
                         
@@ -70,12 +73,20 @@ router.post('/login',(req,res,next)=>{
             }
         })		
             })
-                    // sess.user=user;
+        }
+        else{
+             return res.json({success:false,msg:'You are already logged in,please signout first'})
+        }      
 });
+//superadmin Routes
 router.put('/superban',userController.superban);
 router.put('/superdeban',userController.superdeban);
 router.put('/promote',userController.promote);
 router.put('/demote',userController.demote);
+//admin routes
+router.put('/adminban',userController.adminBan);
+router.put('/admindeban',userController.adminDeban);
+router.post('/deleteReview',userController.deleteReview);
 
 router.put('/editProfile/:id',userController.editProfile);
 
