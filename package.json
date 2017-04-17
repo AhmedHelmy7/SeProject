@@ -20,6 +20,7 @@
         "morgan": "*",
         "passport": "*",
         "passport-jwt": "*",
-        "nodemailer":"*"
+        "nodemailer":"*",
+        "express-validator":"*"
     }
 }

@@ -5,12 +5,16 @@ const cors=require('cors');
 const passport=require('passport');
 const mongoose=require('mongoose');
 const morgan=require('morgan');
-var reviewrouter = require('./app/routes/reviewRoutes');
+const expressValidator = require('express-validator');
+
 var DB_URI = "mongodb://localhost:27017/finalProject";
 var session=require('express-session');
 const app=express();
 const users=require('../SeProject/app/routes/userRoutes');
 const activityroutes = require('./app/routes/activityRoutes');
+const ads=require('../SeProject/app/routes/adRoutes');
+const main=require('../SeProject/app/routes/mainRouter');
+var reviewrouter = require('./app/routes/reviewRoutes');
 const port=8097;
 
 // configure app
@@ -36,7 +40,23 @@ mongoose.connect('mongodb://localhost:27017/finalProject',function(err)
     }
 });
 
+//express valiator Middleware
+app.use(expressValidator({
+  errorFormatter: function(param, msg, value) {
+      var namespace = param.split('.')
+      , root = namespace.shift()
+      , formParam = root;
 
+    while(namespace.length) {
+      formParam += '[' + namespace.shift() + ']';
+    }
+    return {
+      param : formParam,
+      msg   : msg,
+      value : value
+    };
+  }
+}));
 
 //app.use('./users',users);
 
@@ -52,6 +72,8 @@ require('./config/passport')(passport);
 app.use('/activities', activityroutes);
 app.use('/users',users);
 app.use('/review', reviewrouter);
+app.use('/ads',ads);
+app.use('/main',main);
 
 app.get('/',function(req,res)
 {
