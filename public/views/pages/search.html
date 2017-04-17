@@ -1,0 +1,13 @@
+<div class "page-header"> </div>
+
+<form ng-submit="searching.searchAct(searchData);">
+  <label>Activity:</label>
+  <input class="form-control" type="text" name="activity"
+  placeholder="please enter an activity name" ng-model="searching.searchData.activity">
+  <br>
+  <button class= "btn btn-primary" type="submit"> Search </button>
+</form>
+<br>
+<div class="row show-hide-message">
+<div class = "alert alert-success"> {{searching.act}}</div>
+</div>

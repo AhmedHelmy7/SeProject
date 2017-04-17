@@ -3,6 +3,8 @@ var mongojs = require('mongojs');
 var db = mongojs('finalProject', ['companies','advertisements','activites']);
 var bodyParser = require('body-parser');
 var mongoose=require('mongoose');
+let User=require('../models/user');
+
 
 let adController={
   createad:function(req,res) {
@@ -47,10 +49,6 @@ let adController={
   if(err) {
 
 
-    res.render('profile' , {
-      company:doc,
-      error: "we dont currently have an empty place for your ad :("
-    });
 
 
       }  else {

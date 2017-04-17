@@ -13,17 +13,17 @@ const app=express();
 const users=require('../SeProject/app/routes/userRoutes');
 const ads=require('../SeProject/app/routes/adRoutes');
 const main=require('../SeProject/app/routes/mainRouter');
-const port=8097;
+const port=5000;
 
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname,'views'));
+//app.set('view engine', 'ejs');
+//app.set('views', path.join(__dirname,'views'));
 // configure app
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 
 app.use(bodyParser.json());
-//app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'));
 
 
 
@@ -60,7 +60,7 @@ app.use(expressValidator({
 //app.use('./users',users);
 
 app.use(cors());
-app.use(express.static(__dirname + '/public'));
+//app.use(express.static(__dirname + '/public'));
 //app.use(session({secret:"ronaldo",resave:false,saveUninitialized:true}));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
@@ -71,6 +71,10 @@ require('./config/passport')(passport);
 app.use('/users',users);
 app.use('/ads',ads);
 app.use('/main',main);
+
+app.get('*', function(req, res) {
+          res.sendFile(path.join(__dirname +'/public/views/index.html')); // load our public/index.html file
+      });
 
 app.get('/',function(req,res)
 {

@@ -1,0 +1,14 @@
+<div class "page-header"> </div>
+
+<form ng-submit="filtering.filterAct(filterData);">
+  <label>Location:</label>
+  <input class="form-control" type="text" name="location"
+   placeholder="please enter a location" ng-model="filtering.filterData.location">
+  <br>
+  <button class= "btn btn-primary" type="submit"> Search </button>
+</form>
+
+<br>
+<div class="row show-hide-message">
+<div class = "alert alert-success"> {{filtering.comp}}</div>
+</div>
