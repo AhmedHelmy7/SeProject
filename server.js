@@ -17,17 +17,6 @@ const main=require('../SeProject/app/routes/mainRouter');
 var reviewrouter = require('./app/routes/reviewRoutes');
 const port=8097;
 
-// configure app
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
-
-app.use(bodyParser.json());
-
-app.use(express.static(__dirname + '/public'));
-
-
-
 // start the server
 mongoose.connect('mongodb://localhost:27017/finalProject',function(err)
 {

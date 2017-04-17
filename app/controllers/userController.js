@@ -119,7 +119,7 @@ let userController={
         })
 },
     getSubList:function(req, res) {
-
+        
 
         var name =req.body.name;
 
@@ -139,7 +139,11 @@ let userController={
                 }
         })
 
-        }
+    },
+    getProfile:function(req,res,next){
+        
+        res.json({user:req.user});
+    }
 
 
 

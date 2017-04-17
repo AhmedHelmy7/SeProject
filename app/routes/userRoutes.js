@@ -33,7 +33,7 @@ router.post('/register',(req,res,next)=>{
 router.post('/login',(req,res,next)=>{
     const username =req.body.username;
     const password=req.body.password;
-     var sess=req.session;
+     //var sess=req.session;
 
     userController.getUserByUsername(username,(err,user)=>{
         if(err) throw err;
@@ -43,32 +43,34 @@ router.post('/login',(req,res,next)=>{
         userController.comparePassword(password,user.password,(err,isMatch)=>{
             if(err)throw err;
             if(isMatch){
-                 const token =jwt.sign(user,config.secret,{
-                    expiresIn:604800 // 1 week
-                })
+                 
                 if(!user.isBanned)
                 {
-                const token =jwt.sign(user,config.secret,{
-                    expiresIn:604800 // 1 week
-                })}
+                    const token =jwt.sign(user,config.secret,{
+                        expiresIn:604800 // 1 week
+                        
+                    })
+                    res.json({success:true,token:'JWT '+token,user:{
+                        id:user._id,
+                        name:user.name,
+                        username:user.username,
+                        email:user.email
+                    } 
+                
+                    })
+                }
+                
                 else{
                     return res.json({success:false,msg:'You are banned from the server'})
                 }
 
-                res.json({success:true,token:'JWT '+token,user:{
-                    id:user._id,
-                    name:user.name,
-                    username:user.username,
-                    email:user.email
-                } 
-			
-            })
+                
              }else{
                 return res.json({success:false,msg:'Wrong password'})
             }
         })		
             })
-                     sess.user=user;
+                    // sess.user=user;
 });
 router.put('/superban',userController.superban);
 router.put('/superdeban',userController.superdeban);
@@ -78,7 +80,9 @@ router.put('/demote',userController.demote);
 router.put('/editProfile/:id',userController.editProfile);
 
 router.put('/ addToFavourites/:id',userController.addToFavourites);
-
 router.put('/getSubList/:id',userController.getSubList);
+
+router.get('/profile', passport.authenticate('jwt', {session:false}),userController.getProfile);
+
 module.exports=router
 
