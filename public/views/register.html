@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+  </head>
+  <body>
+    <h1>Registeration form</h1>
+
+    <form ng-submit="register.regUser(regData);">
+      <label>Name:</label>
+      <input class="form-control" type="text" name="name" placeholder="please enter name" ng-model="register.regData.name">
+      <br>
+      <label>Email:</label>
+      <input class="form-control" type="text" name="email" placeholder="please enter email" ng-model="register.regData.mail">
+      <br>
+      <label>Username:</label>
+      <input class="form-control" type="text" name="username" placeholder="please enter username" ng-model="register.regData.username">
+      <br>
+      <label>Password:</label>
+      <input class="form-control" type="text" name="password" placeholder="please enter password" ng-model="register.regData.password">
+      <br>
+
+      <button class="btn btn-primary" type="submit">Register</button>
+    </form>
+
+    <br>
+    <div class="row show-hide-message" ng-show="register.succeceMsg">
+        <div class="alert alert-success">{{register.succeceMsg}}</div>
+    </div>
+
+    <br>
+    <div class="row show-hide-message"  ng-show="register.errorMsg">
+        <div class="alert alert-danger">{{register.errorMsg}}</div>
+    </div>
+  </body>
+</html>

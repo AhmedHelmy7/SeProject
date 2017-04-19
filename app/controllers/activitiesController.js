@@ -119,8 +119,9 @@ let activitiesController = {
                 console.log(err);
             } else {
                 console.log(activities)
-                res.json(activities);
-               // res.redirect('/'); //b3d may3ml rating hayrg3 le fen
+                res.send(activities);
+                //return activities;
+               
             }
         }).sort({ avgRating: -1 }).limit(5);
     }
