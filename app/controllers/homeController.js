@@ -1,6 +1,4 @@
 var expressValidator = require('express-validator');
-var mongojs = require('mongojs');
-var db = mongojs('finalProject', ['companies','advertisements','activites']);
 var bodyParser = require('body-parser');
 var mongoose=require('mongoose');
 let Activity = require('../models/Activity');
@@ -19,7 +17,7 @@ let homeController={
     var search_bar = req.body.activity;
     console.log("we are at home controller search");
     console.log(search_bar);
-    Activity.find( {Name : search_bar},"-_id", "-activirt_id",  //we can omit whatever fields we dont wanna show
+    Activity.find( {Name : search_bar},
     function(err,activity){
 
 
@@ -35,9 +33,9 @@ let homeController={
  filter:function(req,res){
    var User_location = req.body.location;
 console.log(User_location);
-   User.find( {location :User_location},"-_id",
+   User.find( {location : User_location},
      function(err,doc){
-       if(err){ res.send( err);}
+       if(err){ console.log(err);res.send( err);}
  else {
 console.log(doc);
   console.log("we are at home controller filter");

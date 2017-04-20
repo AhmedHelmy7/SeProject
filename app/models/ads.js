@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var ActivitySchema = new Schema({
+var adsSchema = new Schema({
     Company_name: {
         type: String,
         required: true
@@ -16,4 +16,4 @@ var ActivitySchema = new Schema({
             //    required: true
     }
 });
-const Activity = module.exports = mongoose.model('activities', ActivitySchema);
+const ads = module.exports = mongoose.model('ads', adsSchema);

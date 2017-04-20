@@ -8,6 +8,27 @@
   <button class= "btn btn-primary" type="submit"> Search </button>
 </form>
 <br>
-<div class="row show-hide-message">
-<div class = "alert alert-success"> {{searching.act}}</div>
+<div class="row show-hide-message" ng-controller="schCtrl">
+<table class="table">
+
+  <tr>
+  <th>Name</th>
+  <th>companyName</th>
+  <th>StartDate</th>
+  <th>EndDate</th>
+  <th>avgRating</th>
+  </tr>
+<tr ng-repeat = "activity in activities">
+
+  <td>{{activity.Name}}</td>
+  <td>{{activity.companyName}}</td>
+  <td>{{activity.StartDate}}</td>
+  <td>{{activity.EndDate}}</td>
+  <td>{{activity.avgRating}}</td>
+</tr>
+</table>
+
+<div ng-if = searching.act>
+<div class = "alert alert-success">  no such records exist!</div>
+</div>
 </div>

@@ -9,6 +9,25 @@
 </form>
 
 <br>
-<div class="row show-hide-message">
-<div class = "alert alert-success"> {{filtering.comp}}</div>
+<div class="row show-hide-message"  ng-controller="ftrCtrl">
+  <table class="table">
+
+    <tr>
+    <th>Name</th>
+    <th>email</th>
+    <th>location</th>
+    </tr>
+  <tr ng-repeat = "company in companies">
+
+    <td>{{company.Name}}</td>
+    <td>{{company.email}}</td>
+    <td>{{company.location}}</td>
+
+  </tr>
+  </table>
+
+  <div ng-if = filtering.comp>
+  <div class = "alert alert-danger">  no such records exist!</div>
+  </div>
+
 </div>

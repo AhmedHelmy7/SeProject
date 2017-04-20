@@ -1,9 +1,8 @@
 var expressValidator = require('express-validator');
-var mongojs = require('mongojs');
-var db = mongojs('finalProject', ['companies','advertisements','activites']);
 var bodyParser = require('body-parser');
 var mongoose=require('mongoose');
-let User=require('../models/user');
+let user=require('../models/user');
+let ads=require('../models/ads');
 
 
 let adController={
@@ -17,31 +16,34 @@ let adController={
 
 
     user.count({}, function(err, c) {
-      console.log(c);
+      console.log("count is " + c);
       user.find({}, function(err,doc)
     {
      for(var i=0;i<c;i++)
      {
 
-       n= n+ doc[i].ads.length;
+    //   n= n+ doc[i].ads.length();
      }
    })})
-
+  console.log("n is "+ n);
+  n=2;
   if(n<15) //how many ads will we have?
   {
 
   user.findOne(
-    {Company_name : req.body.company},
+    {Name : req.body.company},
       function(err,doc){
+        console.log(req.body.company);
         console.log(doc);
         if(doc.ads != null){
-        var curlist = doc.ads
+          console.log("doc.ads is " + doc.ads);
+        var curlist = doc.ads;
       }
       else {  var curlist = []};
-        curlist.push(newlink)
+        curlist.push(newlink);
 
-        user.findAndModify({
-          query:{Company_name : company},
+        user.findOneAndUpdate({
+          query:{Name : company},
           update: {$set: {ads : curlist}},
           new: true
         }, function (err, doc, lastErrorObject) {
@@ -56,9 +58,7 @@ let adController={
         var newnewlink = {link : newlink,  duration : duration};
       ads.insert(newnewlink,function(err,result){
 
-        //  res.render('profile' , {
-      //      company:company // not sure what to pass for profile yet.
-    //      });
+    res.json({"success": true});
         })
 
 

@@ -1,7 +1,7 @@
 angular.module('filterControllers',[])
 
 
-.controller('ftrCtrl',function($http){
+.controller('ftrCtrl',function($http,$scope){
 
   var app= this;
 
@@ -11,8 +11,14 @@ this.filterAct = function(filterData) {
       console.log(this.searchData);
       $http.post('/main/filter',this.filterData).then(function(data){
     console.log(data.data.company);
-    app.comp = data.data.company;
 
+
+    $scope.companies = data.data.company;
+
+    var count = 0;
+    count= data.data.company.length;
+
+    if(count==0){app.comp=1};
 
         })
   };

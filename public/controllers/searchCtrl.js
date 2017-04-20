@@ -1,7 +1,7 @@
 angular.module('searchControllers',[])
 
 
-.controller('schCtrl',function($http){
+.controller('schCtrl',function($http,$scope){
 
 var app= this;
 
@@ -11,9 +11,15 @@ this.searchAct = function(searchData) {
         console.log(this.searchData);
   $http.post('/main/search',this.searchData).then(function(data){
 
-      console.log(data.data.activities);
+      var count = 0;
+      count= data.data.activities.length;
 
-      app.act = data.data.activities;
+      if(count==0){app.act=1};
+      $scope.activities = data.data.activities;
+
+      
+
+  // app.act = data.data.activities[0].Name;
 
     })
   };
