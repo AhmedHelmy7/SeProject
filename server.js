@@ -66,6 +66,7 @@ app.use('/main',main);
 
 app.get('/',function(req,res)
 {
+    res.sendFile(path.join(__dirname + '/public/app/views/index.html'));
 });
 app.listen(port,function()
 {

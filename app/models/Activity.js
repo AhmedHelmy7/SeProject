@@ -22,6 +22,10 @@ var ActivitySchema = new Schema({
     desc: {
         type: String
     },
+    location:
+    {
+        type: String
+    },
     numberOfApplicatons: {
         type: String,
         required: true

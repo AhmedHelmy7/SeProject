@@ -13,9 +13,7 @@ router.post('/register',(req,res,next)=>{
         name:req.body.name,
         email:req.body.email,
         username:req.body.username,
-        password:req.body.password,
-        isAdmin:req.body.isAdmin,
-        isBanned:req.body.isBanned
+        password:req.body.password
     });
 
     userController.addUser(newUser,(err,user)=>{
@@ -78,6 +76,10 @@ router.post('/login',(req,res,next)=>{
              return res.json({success:false,msg:'You are already logged in,please signout first'})
         }      
 });
+router.post('/signout',(req,res,next)=>{
+    flag=false;
+    
+});
 //superadmin Routes
 router.put('/superban',userController.superban);
 router.put('/superdeban',userController.superdeban);
@@ -88,12 +90,14 @@ router.put('/adminban',userController.adminBan);
 router.put('/admindeban',userController.adminDeban);
 router.post('/deleteReview',userController.deleteReview);
 
-router.put('/editProfile/:id',userController.editProfile);
+router.put('/editProfile',userController.editProfile);
 
-router.put('/ addToFavourites/:id',userController.addToFavourites);
-router.put('/getSubList/:id',userController.getSubList);
+router.put('/addToFavourites',userController.addToFavourites);
+router.put('/getSubList',userController.getSubList);
+router.get('/myFavourites',userController.myFavourites);
+router.get('/mySubscribers',userController.mySubscribers);
+
 
 router.get('/profile', passport.authenticate('jwt', {session:false}),userController.getProfile);
 
-module.exports=router
-
+module.exports=router;

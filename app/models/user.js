@@ -37,9 +37,8 @@ var UserSchema=new Schema(
 	fav_list : [{
    	name: String,
   	location:String,
-	price:Number,
-   	date: Date
-     	}],
+	price:Number     	
+}],
 
      sub_List:[{name :String}],
      isBanned :{type:Boolean

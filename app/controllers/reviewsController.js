@@ -23,13 +23,8 @@ let reviewsController = {
 
         /////SESSION NEEDED
         revs.client = req.session.username;
-
-
         revs.content = req.body.content;
-
         revs.title = req.body.title;
-
-
         Review.create(revs, function(err, acc) {
             if (err) {
                 throw err;

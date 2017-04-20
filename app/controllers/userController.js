@@ -149,14 +149,14 @@ deleteReview:function(req,res) {
 },
      editProfile:function(req,res){
      
-      User.findById(req.params.id,function(err,user){
+      User.findById(temp.id,function(err,user){
         if(user==null){
             console.log('yes');
           }
              else{
          
         user.email=req.body.email;
-   user.name=req.body.name;
+        user.name=req.body.name;
            user.password = req.body.password;
           user.creditCardNumber =req.body.creditCardNumber;
    
@@ -178,7 +178,7 @@ deleteReview:function(req,res) {
         var location =req.body.location;
         var price =req.body.price;
         var  date =req.body.date;
-        User.findById(req.params.id,function(err,user){
+        User.findById(temp.id,function(err,user){
         if(user==null){
             console.log('yes');
           }
@@ -195,12 +195,22 @@ deleteReview:function(req,res) {
                 }
         })
 },
+myFavourites:function(req, res)
+{
+    User.findById(temp.id,function(err,user){
+        if(err)
+         throw err;
+         else
+         res.json(user.fav_list);
+    })
+},
+
     getSubList:function(req, res) {
         
 
         var name =req.body.name;
 
-        User.findById(req.params.id,function(err,user){
+        User.findById(temp.id,function(err,user){
        if(user==null){
             console.log('yes');
           }
@@ -216,6 +226,14 @@ deleteReview:function(req,res) {
                 }
         })
 
+    },
+    mySubscribers:function(req, res) {
+    User.findById(temp.id,function(err,user){
+        if(err)
+         throw err;
+         else
+         res.json(user.sub_List);
+    })
     },
     getProfile:function(req,res,next){
         temp=req.user;

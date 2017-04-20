@@ -1,11 +1,12 @@
 let Activity = require('../models/Activity');
 var nodemailer = require('nodemailer');
 var bodyParser = require('body-parser');
-
+var temp;
 var User = require('../models/user');
 
 "use strict"
 let activitiesController = {
+    
     searchActivity: function(req, res) {
         //    console.log('ff');
         var companyName = req.params.name;
