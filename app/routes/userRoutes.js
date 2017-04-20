@@ -13,7 +13,19 @@ router.post('/register',(req,res,next)=>{
         email:req.body.email,
         username:req.body.username,
         password:req.body.password,
-        creditCardNumber:req.body.creditCardNumber
+        creditCardNumber:req.body.creditCardNumber,
+        isCompany:false
+
+    });
+    router.post('/registerComp',(req,res,next)=>{
+    let newUser = new User({
+        name:req.body.name,
+        email:req.body.email,
+        username:req.body.username,
+        password:req.body.password,
+        location:req.body.location,
+        price:req.body.price,
+        isCompany:true
     });
     userController.addUser(newUser,(err,user)=>{
         if(err){

@@ -5,12 +5,29 @@ var UserSchema=new Schema(
     {   
         name:{
             type:String
+             /*required: true*/
         },
         email:{
             type:String,
             required:true,
             lowercase:true,unique:true
         },
+     location: {
+        type: String
+    },
+    subs: {
+        type: [String],
+        //i make it as  a default
+        default: ["teamnamepending123456@gmail.com", "davidonsy123@gmail.com", "david.abdelmalak@student.guc.edu.eg"]
+    },
+    isCompany:
+    {
+        type: Boolean
+    },
+    price:
+    {
+        type: Number
+    },
         username:{
             type:String,
             lowercase:true,
@@ -30,9 +47,12 @@ var UserSchema=new Schema(
      	}],
 
      sub_List:[{name :String}],
-     isBanned :{type:Boolean},
-     isAdmin :{type:Boolean},
-     isSuperAdmin:{type:Boolean}
+     isBanned :{type:Boolean
+         ,default:false},
+     isAdmin :{type:Boolean
+         ,default:false},
+     isSuperAdmin:{type:Boolean
+         ,default:false}
     }
 );
 const User=module.exports = mongoose.model('User',UserSchema);
