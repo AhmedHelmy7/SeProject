@@ -1,14 +1,14 @@
-angular.module('RegisterCtrl',['ngRoute','regService']).controller('RegisterController',function($http,$location,User) {
+angular.module('RegisterCtrl',['ngRoute','regService']).controller('RegisterController',function($scope,$http,$location) {
 
-  var app=this;
+  var app=$scope;
 
   this.regUser = function(regData){
     app.errorMsg=false;
 
-      User.create(app.regData).then(function(data){
+      $http.post('/users/register',this.regData).then(function(data){
         if(data.data.success){
            //Create success message
-           app.succeceMsg = data.data.message;
+           app.successMsg = data.data.message;
            //Redirect to home page
            $location.path('/');
          }

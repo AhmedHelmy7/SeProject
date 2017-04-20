@@ -12,21 +12,21 @@
       <input class="form-control" type="text" name="name" placeholder="please enter name" ng-model="register.regData.name">
       <br>
       <label>Email:</label>
-      <input class="form-control" type="text" name="email" placeholder="please enter email" ng-model="register.regData.mail">
+      <input class="form-control" type="text" name="email" placeholder="please enter email" ng-model="register.regData.email">
       <br>
       <label>Username:</label>
       <input class="form-control" type="text" name="username" placeholder="please enter username" ng-model="register.regData.username">
       <br>
       <label>Password:</label>
-      <input class="form-control" type="text" name="password" placeholder="please enter password" ng-model="register.regData.password">
+      <input class="form-control" type="password" name="password" placeholder="please enter password" ng-model="register.regData.password">
       <br>
 
       <button class="btn btn-primary" type="submit">Register</button>
     </form>
 
     <br>
-    <div class="row show-hide-message" ng-show="register.succeceMsg">
-        <div class="alert alert-success">{{register.succeceMsg}}</div>
+    <div class="row show-hide-message" ng-show="register.successMsg">
+        <div class="alert alert-success">{{register.successMsg}}</div>
     </div>
 
     <br>

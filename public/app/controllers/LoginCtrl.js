@@ -1,14 +1,14 @@
-angular.module('LoginCtrl',['ngRoute','authService']).controller('LoginController',function($http,$location,Auth) {
+angular.module('LoginCtrl',['ngRoute','authService']).controller('LoginController',function($scope,$http,$location) {
 
-  var app=this;
+  var app=$scope;
 
   this.doLogin = function(loginData){
     app.errorMsg=false;
 
-      Auth.login(app.loginData).then(function(data){
+      $http.post('/users/login',this.loginData).then(function(data){
         if(data.data.success){
            //Create success message
-           app.succeceMsg = data.data.message;
+           app.successMsg = data.data.message;
            //Redirect to home page
            $location.path('/');
          }

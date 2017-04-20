@@ -5,7 +5,7 @@ angular.module('regService',['ngRoute'])
 
     //User.create(regData)
     userFactory.create = function(regData){
-      return $http.post('/userRoutes/register',regData);
+      return ;
     }
 
     return userFactory;

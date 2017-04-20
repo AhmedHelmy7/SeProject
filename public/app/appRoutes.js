@@ -3,7 +3,7 @@ angular.module('appRoutes', ['ngRoute']).config(function($routeProvider, $locati
   $routeProvider
     // home page
     .when('/', {
-        templateUrl: 'app/views/index.html'
+        templateUrl: 'app/views/pages/home.html'
     })
     // register page that will use the RegisterController
     .when('/register', {

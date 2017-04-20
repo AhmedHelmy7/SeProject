@@ -33,11 +33,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 require('./config/passport')(passport);
 app.use('/users',users);
-//2nd field not known
-//app.use('/userRoutes',userRoutes);
+
 // frontend routes =========================================================
 // route to handle all angular requests
-app.get('*', function(req, res) {
+app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname +'/public/app/views/index.html')); //respond to the route request with the html file.
         });
 

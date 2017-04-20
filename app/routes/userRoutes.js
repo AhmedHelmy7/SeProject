@@ -16,9 +16,10 @@ router.post('/register',(req,res,next)=>{
         isAdmin:req.body.isAdmin,
         isBanned:req.body.isBanned
     });
-
     userController.addUser(newUser,(err,user)=>{
         if(err){
+                console.log(err);
+        
             res.json({success:false,msg:'Failed to register user'});
 
         }else{
@@ -40,6 +41,9 @@ router.post('/login',(req,res,next)=>{
         userController.comparePassword(password,user.password,(err,isMatch)=>{
             if(err)throw err;
             if(isMatch){
+                const token =jwt.sign(user,config.secret,{
+                    expiresIn:604800 // 1 week
+                })
                 if(!user.isBanned)
                 {
                 const token =jwt.sign(user,config.secret,{
