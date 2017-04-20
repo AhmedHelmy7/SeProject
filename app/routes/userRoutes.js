@@ -28,7 +28,7 @@ router.post('/register',(req,res,next)=>{
 router.post('/login',(req,res,next)=>{
     const username =req.body.username;
     const password=req.body.password;
-     var sess=req.session;
+   
 
     userController.getUserByUsername(username,(err,user)=>{
         if(err) throw err;
@@ -45,7 +45,9 @@ router.post('/login',(req,res,next)=>{
                 {     
                 const token =jwt.sign(user,config.secret,{
                     expiresIn:604800 // 1 week
-                })}
+                })
+                
+            }
                 else{
                     return res.json({success:false,msg:'You are banned from the server'})
                 }
@@ -57,15 +59,18 @@ router.post('/login',(req,res,next)=>{
                     email:user.email
                 }		
             })
-                     sess.user=user;
+           
+                     
             }else{
                 return res.json({success:false,msg:'Wrong password'})
             }
         })
     })
+
 });
 router.put('/superban',userController.superban);
 router.put('/superdeban',userController.superdeban);
 router.put('/promote',userController.promote);
 router.put('/demote',userController.demote);
+router.get('/profile', passport.authenticate('jwt', {session:false}),userController.getProfile);
 module.exports=router

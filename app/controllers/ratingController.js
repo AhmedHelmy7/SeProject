@@ -1,12 +1,16 @@
 let Rating = require('../models/Rating');
 let Activity = require('../models/Activity');
 let RegisteredUser = require('../models/RegisteredUser')
+let session=require("express-session");
+var passport = require('passport');
 let ratingController = {
     //add rating function that creates a new rating in the ratings collection and adds its id in the array list of the corresponding activity and calculates the avgRating of that activity
     addRating: function(req, res) {
+        console.log("enters add rating")
+        sess=req.session;
         let rating = new Rating({
-            activityID:req.body.activityID,
-            registeredUserID:req.body.registeredUserID,
+            activityID:"58f0ca32afd8e213cd194c7c", //temporary hard coding
+            registeredUserID:sess.user._id,
              rating:req.body.rating
         });       
         Rating.create(rating,function(err, acc) {

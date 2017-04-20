@@ -1,5 +1,6 @@
 const express = require('express');
-
+var passport = require('passport');
+var session =require('express-session')
 var router = express.Router();
 
 var activitiesController = require('../controllers/activitiesController');
@@ -34,7 +35,7 @@ router.put('/:_id', activitiesController.updateActivity);
 //routing to call the get getTopRatedActivities function
 router.post('/top', activitiesController.getTopRatedActivities);
 //routing to add a new rating
-router.post('/createrating', ratingController.addRating);
+router.post('/createrating',ratingController.addRating);
 
 // export router
 module.exports = router;

@@ -1,6 +1,6 @@
 let User=require('../models/user');
 let bcrypt =require('bcryptjs');
-
+let session=require('express-session');
 let userController={
     getUserById:function(id,callback){
         User.findById(id,callback);
@@ -66,7 +66,12 @@ User.findOneAndUpdate({username:req.body.username},{isAdmin:false},{},function(e
                 console.log('Demoted');
            }
 });
-}
+},
+getProfile:function(req,res,next){
+        req.session.user=req.user;
+        req.session.flag=true;
+        res.json({user:req.user});
+    }
 }
 module.exports=userController;
 

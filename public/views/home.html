@@ -11,7 +11,28 @@
                <li ng-repeat="activity in activities">
                     {{activity.Name}} {{activity.avgRating}} {{activity.numberOfApplicatons}}
                </li>
-           </ol> x
+           </ol> 
+        </div>
+        <br>
+        <br>
+        <div ng-controller="addratingcontroller">
+        <form ng-submit="addRating(RatingData)">
+    
+            <!-- Username -->
+            <input class="form-control" type="text" name="rating" placeholder="please enter a Rating" ng-model="addratingcontroller.RatingData.rating">
+            <br>
+            <!-- Submit/Ban Button -->
+            <button class="btn btn-primary" type="submit">Rate</button>
+        </form>
+        <br>
+
+
+        
+            <input class="form-control" type="text" name="Rating"
+             placeholder="please enter aRating" ng-model="addratingcontroller.data.rating">
+             <br>
+             <button class= "btn btn-primary" ng-clilck="addratingcontroller.addRating(data)" type="submit"> Rate </button>
+             <h4>{{missingRatingError}}</h4>
         </div>
         
     </body>
