@@ -1,6 +1,29 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var titlize = require('mongoose-title-case');
+var validate = require('mongoose-validator');
 
+var nameValidator = [
+    validate({
+        validator: 'matches',
+        arguments: /^[a-zA-Z]+$/
+    })
+]
+var descValidator = [
+    validate({
+        validator: 'isLength',
+        arguments: [10, 150],
+        message: 'Description must be between 10 characters to 150 characters'
+    })
+]
+
+var numberOfapplicationsValidator = [
+    validate({
+        validator: 'matches',
+        arguments: /^\d+$/,
+        message: 'You have to insert Numbers DUDE'
+    })
+]
 var ActivitySchema = new Schema({
     companyName: {
         type: String,
@@ -8,7 +31,9 @@ var ActivitySchema = new Schema({
     },
     Name: {
         type: String,
-        required: true
+        required: true,
+        validate: nameValidator
+
     },
     StartDate: {
         type: Date,
@@ -19,12 +44,18 @@ var ActivitySchema = new Schema({
         type: Date
             //  required: true
     },
+    location: {
+        type: String,
+        required: true
+    },
     desc: {
-        type: String
+        type: String,
+        validate: descValidator
     },
     numberOfApplicatons: {
         type: String,
-        required: true
+        required: true,
+        validate: numberOfapplicationsValidator
     },
     flag: {
         type: String,
@@ -37,10 +68,11 @@ var ActivitySchema = new Schema({
         type: Schema.ObjectId,
         ref: 'rating' //could be like this or ratingSchema
     }],
-    numberOfRatings:{
-        type:Number,
-        default:1
+    numberOfRatings: {
+        type: Number,
+        default: 1
     }
 
 });
+
 const Activity = module.exports = mongoose.model('activities', ActivitySchema);

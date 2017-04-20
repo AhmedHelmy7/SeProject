@@ -1,26 +1,27 @@
 {
-    "name": "SeProject",
-
-    "description": "",
-    "main": "server.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "bcryptjs": "*",
-        "body-parser": "^1.16.1",
-        "cors": "*",
-        "ejs": "^2.5.5",
-        "express": "^4.14.1",
-        "express-session": "^1.15.2",
-        "jsonwebtoken": "*",
-        "mongoose": "^4.8.2",
-        "morgan": "*",
-        "passport": "*",
-        "passport-jwt": "*",
-        "nodemailer":"*",
-        "express-validator":"*"
-    }
+  "name": "SeProject",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "angularjs-datepicker": "^2.1.17",
+    "bcryptjs": "*",
+    "body-parser": "^1.16.1",
+    "cors": "*",
+    "ejs": "^2.5.5",
+    "express": "^4.14.1",
+    "express-session": "^1.15.2",
+    "express-validator": "*",
+    "jsonwebtoken": "*",
+    "mongoose": "^4.8.2",
+    "mongoose-validator": "^1.2.5",
+    "morgan": "*",
+    "nodemailer": "*",
+    "passport": "*",
+    "passport-jwt": "*"
+  }
 }

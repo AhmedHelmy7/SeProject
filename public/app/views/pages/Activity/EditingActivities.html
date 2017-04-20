@@ -1,0 +1,46 @@
+<!-- Header -->
+<div class="page-header">
+    <h1>Edit Activity</h1>
+</div>
+<!-- Header -->
+
+<br>
+
+<!-- Bootstrap Navigation Tabs -->
+<ul class="nav nav-tabs">
+    <li role="presentation" ng-click="namePhase();" ng-class="nameTab"><a href="#">Name</a></li>
+    <li role="presentation" ng-click="StartDatPhase();" ng-class="StartDatTab"><a href="#">StartDate</a></li>
+    <li role="presentation" ng-click="EndDatePhase();" ng-class="EndDateTab"><a href="#">EndDate</a></li>
+    <li role="presentation" ng-click="LocationPhase();" ng-class="LocationTab"><a href="#">Location</a></li>
+    <li role="presentation" ng-click="numberOfApplicatonsPhase();" ng-class="numberOfApplicatonsTab"><a href="#">Number of Applications</a></li>
+    <li role="presentation" ng-click="descPhase();" ng-class="descTab"><a href="#">Description</a></li>
+</ul>
+
+
+<br>
+<br>
+
+<!-- Phase One: Name -->
+<form name="nameForm" ng-show="phase1" ng-submit="updateName(newName)" novalidate>
+    <!-- Name Div -->
+    <label>Name:</label>
+    <input class="form-control" type="text" name: "Name" placeholder="please enter Name" ng-model="nameForm.Name">
+    <br>
+    <!--
+    <label>Description:</label>
+    <input class="form-control" type="text" name: "desc" placeholder="please enter desc" ng-model="edit.nameForm.desc">
+    <br>
+    <label>location:</label>
+    <input class="form-control" type="text" name: "location" placeholder="please enter location" ng-model="edit.nameForm.location">
+    <br>
+    <label>numberOfApplications:</label>
+    <input class="form-control" type="text" name: "numberOfApplicatons" placeholder="please enter numberOfApplications" ng-model="edit.nameForm.numberOfApplicatons">
+    
+    !-->
+    <br>
+    <p class="help-block" ng-show="(!nameForm.Name.$pristine && nameForm.Name.$error.required) || (nameForm.$submitted && nameForm.Names.$error.required)">This field is required</p>
+
+
+    <!-- Submit Button -->
+    <button ng-disabled="disabled" class="btn btn-primary" type="submit">Update</button>
+</form>

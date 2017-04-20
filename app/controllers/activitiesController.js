@@ -6,22 +6,8 @@ var User = require('../models/user');
 
 "use strict"
 let activitiesController = {
-    searchActivity: function(req, res) {
-        //    console.log('ff');
-        var companyName = req.params.name;
-        Activity.find({ companyName: companyName, flag: "0" }, function(err, acc) {
-            if (err) {
-                throw err;
-            } else {
-                res.json(acc);
-            }
-        });
 
-
-        //console.log(places.find(category));       
-        //activities.find({ companyName: companyName, flag: "0" }, callback);
-    },
-    searchDeleted: function(req, res) {
+    /* searchDeleted: function(req, res) {
         var companyName = req.params.name;
         Activity.find({ companyName: companyName, flag: "1" }, function(err, acc) {
             if (err) {
@@ -31,73 +17,45 @@ let activitiesController = {
             }
         });
     },
-    addActivities: function(req, res) {
-        //console.log("enters addActivities")
-        var Activ = new Activity({
-            companyName:req.body.companyName,
-            Name:req.body.Name,
-            numberOfApplicatons:req.body.numberOfApplicatons
-        });
-
-        //Activ.companyName = req.body.CompanyName
-
-
-        Activ.Name = req.body.Name;
-
-        Activ.StartDate = req.body.StartDate
-
-        Activ.EndDate = req.body.EndDate
-        Activ.avgRating=req.body.avgRating;
-       Activ.desc = req.body.desc
-       Activ.numberOfApplicatons = req.body.numberOfApplicatons;
-
-        Activity.create(Activ, function(err, acc) {
-            if (err) {
-                throw err;
-            } else {
-                res.json(acc);
-            }
-        });
-        //okok(Activ.companyName);
-        // sayeb
-    },
-    deleteActivity: function(req, res) {
-        var id = req.params._id;
-        var name = { _id: id };
-        var update = {
-            flag: "1"
-        };
-        Activity.findOneAndUpdate(name, update, [], function(err, res) {
-            if (err) {
-                throw err;
-            } else {
-                console.log('Deleted');
-            }
-        });
-    },
+*/
+    /*  deleteActivity: function(req, res) {
+          var id = req.params._id;
+          var name = { _id: id };
+          var update = {
+              flag: "1"
+          };
+          Activity.findOneAndUpdate(name, update, [], function(err, res) {
+              if (err) {
+                  throw err;
+              } else {
+                  console.log('Deleted');
+              }
+          });
+      },*/
     // (id, activity, options, callback) 
-    updateActivity: (req, res) => {
-        var id = req.params._id;
-        var query = { _id: id };
-        var update = {
-            Name: req.body.Name,
-            StartDate: req.body.StartDate,
-            EndDate: req.body.EndDate,
-            desc: req.body.desc,
-            numberOfApplicatons: req.body.numberOfApplicatons
-                //        image_url: book.image_url,
-                //        buy_url: book.buy_url
-        }
-        Activity.findOneAndUpdate(query, update, {}, function(err, res) {
-            if (err) {
-                throw err;
-            } else {
-                console.log('Updated');
+    /*    updateActivity: (req, res) => {
+            var id = req.params._id;
+            var query = { _id: id };
+            var update = {
+                Name: req.body.Name,
+                StartDate: req.body.StartDate,
+                EndDate: req.body.EndDate,
+                desc: req.body.desc,
+                numberOfApplicatons: req.body.numberOfApplicatons
+                    //        image_url: book.image_url,
+                    //        buy_url: book.buy_url
             }
-        });
-    },
+            Activity.findOneAndUpdate(query, update, {}, function(err, res) {
+                if (err) {
+                    throw err;
+                } else {
+                    console.log('Updated');
+                }
+            });
+        },*/
+
     //view activity
-    viewActivity: function(req, res) {
+    /*viewActivity: function(req, res) {
         var id = req.params._id;
         Activity.find({ _id: id }, function(err, acc) {
             if (err) {
@@ -106,9 +64,10 @@ let activitiesController = {
                 res.json(acc);
             }
         });
-        //console.log(places.find(category));       
-        //activities.find({ companyName: companyName, flag: "0" }, callback);
-    },
+        },*/
+    //console.log(places.find(category));       
+    //activities.find({ companyName: companyName, flag: "0" }, callback);
+
     //A function that finds the top rated activities and storts them by avgRating
     getTopRatedActivities: function(req, res) {
 
@@ -120,7 +79,7 @@ let activitiesController = {
             } else {
                 console.log(activities)
                 res.json(activities);
-               // res.redirect('/'); //b3d may3ml rating hayrg3 le fen
+                // res.redirect('/'); //b3d may3ml rating hayrg3 le fen
             }
         }).sort({ avgRating: -1 }).limit(5);
     }

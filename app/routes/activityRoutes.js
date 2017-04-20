@@ -9,21 +9,19 @@ var ratingController = require('../controllers/ratingController')
 
 // add routes
 //getAllActivitiesWhichIsActive
-router.get('/:name', activitiesController.searchActivity);
 
-router.get('/:name/trash', activitiesController.searchDeleted);
+/*router.get('/:name/trash', activitiesController.searchDeleted);
+ */
+//addActivity
 
-//add Activities by entering Name of Company
-router.post('/', activitiesController.addActivities);
 
 //viewActivity
-router.get('/view/:_id', activitiesController.viewActivity);
-
+/*router.get('/view/:_id', activitiesController.viewActivity);
+ */
 //delte Activity
-router.delete('/:_id', activitiesController.deleteActivity);
 
 //Update
-router.put('/:_id', activitiesController.updateActivity);
+//router.put('/:_id', activitiesController.updateActivity);
 
 
 //post Comments.
@@ -32,9 +30,9 @@ router.put('/:_id', activitiesController.updateActivity);
 //getCOMMENTS
 //router.get('/:_reviewID/comments', commentController.getComments);
 //routing to call the get getTopRatedActivities function
-router.post('/top', activitiesController.getTopRatedActivities);
+//router.post('/top', activitiesController.getTopRatedActivities);
 //routing to add a new rating
-router.post('/createrating', ratingController.addRating);
+//router.post('/createrating', ratingController.addRating);
 
 // export router
 module.exports = router;
