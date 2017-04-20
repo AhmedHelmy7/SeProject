@@ -13,8 +13,7 @@ router.post('/register',(req,res,next)=>{
         email:req.body.email,
         username:req.body.username,
         password:req.body.password,
-        isAdmin:req.body.isAdmin,
-        isBanned:req.body.isBanned
+        creditCardNumber:req.body.creditCardNumber
     });
     userController.addUser(newUser,(err,user)=>{
         if(err){
