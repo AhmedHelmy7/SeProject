@@ -1,15 +1,15 @@
-angular.module('searchControllers',[])
+angular.module('searchRateControllers',[])
 
 
-.controller('schCtrl',function($http,$scope){
+.controller('schRateCtrl',function($http,$scope){
 
 var app= this;
 
-this.searchAct = function(searchData) {
+this.searchRateAct = function(searchData) {
 
   console.log('search submitted');
         console.log(this.searchData);
-  $http.post('/main/search',this.searchData).then(function(data){
+  $http.post('/main/searchRate',this.searchData).then(function(data){
 
       var count = 0;
       count= data.data.activities.length;
@@ -19,7 +19,6 @@ this.searchAct = function(searchData) {
 
 
 
-  // app.act = data.data.activities[0].Name;
 
     })
   };

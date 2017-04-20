@@ -25,6 +25,21 @@ $routeProvider
     controllerAs: 'filtering'
 
   })
+  .when('/searchComp',{
+
+    templateUrl : 'views/pages/searchComp.html',
+    controller : 'schCompCtrl',
+    controllerAs: 'searchingComp'
+
+  })
+
+  .when('/searchRate',{
+
+    templateUrl : 'views/pages/searchRate.html',
+    controller : 'schRateCtrl',
+    controllerAs: 'searchingRate'
+
+  })
 
 .otherwise({redirectTo: '/'});
 

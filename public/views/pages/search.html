@@ -13,10 +13,10 @@
 
   <tr>
   <th>Name</th>
-  <th>companyName</th>
-  <th>StartDate</th>
-  <th>EndDate</th>
-  <th>avgRating</th>
+  <th>Company Name</th>
+  <th>Start Date</th>
+  <th>End Date</th>
+  <th>average Rating</th>
   </tr>
 <tr ng-repeat = "activity in activities">
 
@@ -29,6 +29,6 @@
 </table>
 
 <div ng-if = searching.act>
-<div class = "alert alert-success">  no such records exist!</div>
+<div class = "alert alert-danger">  no such records exist!</div>
 </div>
 </div>

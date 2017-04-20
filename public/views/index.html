@@ -18,6 +18,8 @@
 <script src="routes.js"> </script>
 <script src="../controllers/searchCtrl.js"> </script>
 <script src="../controllers/filterCtrl.js"> </script>
+<script src="../controllers/searchCompCtrl.js"> </script>
+<script src="../controllers/searchRateCtrl.js"> </script>
     <title>Theme Template for Bootstrap</title>
 
 
@@ -35,13 +37,24 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Search for stuff!</a>
+          <a class="navbar-brand" href="/">T N P</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Home</a></li>
-            <li><a href="/filter">Filter</a></li>
-            <li><a href="/search">Search</a></li>
+        <!--    <li class="active"><a href="/">Home</a></li> -->
+            <li class="dropdown">
+         <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Search <span class="caret"></span></a>
+         <ul class="dropdown-menu">
+           <li class="dropdown-header">Activities</li>
+           <li><a href="/search">By Name</a></li>
+           <li><a href="/searchRate">By Rating</a></li>
+           <li role="separator" class="divider"></li>
+           <li class="dropdown-header">Companies</li>
+          <li><a href="/filter">By location</a></li>
+          <li><a href="/searchComp">By Name</a></li>
+         </ul>
+       </li>
+
 
           </ul>
         </div><!--/.nav-collapse -->
