@@ -4,7 +4,7 @@ angular.module('filterControllers',[])
 .controller('ftrCtrl',function($http,$scope){
 
   var app= this;
-
+//takes data from the user and sends it to backend to get filltered
 this.filterAct = function(filterData) {
   console.log('filter submitted');
     console.log(this.filterData)

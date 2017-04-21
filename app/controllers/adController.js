@@ -22,7 +22,7 @@ let adController={
      for(var i=0;i<c;i++)
      {
 
-    //   n= n+ doc[i].ads.length();
+    
      }
    })})
   console.log("n is "+ n);

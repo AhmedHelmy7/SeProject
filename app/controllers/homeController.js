@@ -5,6 +5,7 @@ let Activity = require('../models/Activity');
 let User=require('../models/user');
 
 let homeController={
+  //search the database for an activity with a particular name
   search:function(req,res) {
   console.log(req.body.activity);
     req.checkBody('activity', 'Please enter a search word').notEmpty();
@@ -28,7 +29,7 @@ let homeController={
     })
     }
  },
-
+//filter the database for activities with the highest ratings in order
  searchRate:function(req,res) {
    console.log("we are at home controller search by rate");
    Activity.find().sort({avgRating: 'desc', Name: -1}).exec(
@@ -43,7 +44,7 @@ let homeController={
   })
 
 },
-
+//search for a company with a particular name
  searchComp:function(req,res) {
  console.log(req.body.activity);
    req.checkBody('activity', 'Please enter a search word').notEmpty();
@@ -68,7 +69,7 @@ let homeController={
    })
    }
 },
-
+//filter the database for a company in a particular location 
  filter:function(req,res){
    var User_location1 = req.body.location;
    var User_location = User_location1.toLowerCase();

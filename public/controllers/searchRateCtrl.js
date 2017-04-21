@@ -4,7 +4,7 @@ angular.module('searchRateControllers',[])
 .controller('schRateCtrl',function($http,$scope){
 
 var app= this;
-
+//sends the backend request for activities with the best ratings
 this.searchRateAct = function(searchData) {
 
   console.log('search submitted');

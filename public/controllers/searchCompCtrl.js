@@ -4,7 +4,7 @@ angular.module('searchCompControllers',[])
 .controller('schCompCtrl',function($http,$scope){
 
 var app= this;
-
+//takes data from the user and sends it to backend
 this.searchCompAct = function(searchData) {
 
   console.log('search submitted');

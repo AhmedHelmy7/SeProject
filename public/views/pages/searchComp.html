@@ -1,6 +1,6 @@
 <div class "page-header"> </div>
-
-<form ng-submit="searchingComp.searchCompAct(searchData);">
+ <!--    submit form + button-->
+<form ng-submit <!--    submit form + button-->="searchingComp.searchCompAct(searchData);">
   <label>company:</label>
   <input class="form-control" type="text" name="activity"
   placeholder="please enter a company name" ng-model="searchingComp.searchData.activity">
@@ -10,7 +10,7 @@
 <br>
 <div class="row show-hide-message" ng-controller="schCompCtrl">
   <table class="table">
-
+ <!--    Table-->
     <tr>
     <th>Name</th>
     <th>email</th>

@@ -4,7 +4,7 @@ angular.module('searchControllers',[])
 .controller('schCtrl',function($http,$scope){
 
 var app= this;
-
+//takes data from the user and sends it to backend
 this.searchAct = function(searchData) {
 
   console.log('search submitted');
