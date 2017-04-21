@@ -27,6 +27,11 @@ app.use(cors());
 app.use(express.static(__dirname + '/public'));
 //app.use(session({secret:"ronaldo",resave:false,saveUninitialized:true}));
 app.use(morgan('dev'));
+app.use(session({
+    secret:'super secret',
+   
+    cookie:{maxAge:60000}
+}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(passport.initialize());
