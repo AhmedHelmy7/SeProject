@@ -1,4 +1,4 @@
-angular.module('LoginCtrl',['ngRoute','authService']).controller('LoginController',function($scope,$http,$location) {
+angular.module('LoginCtrl',['ngRoute']).controller('LoginController',function($scope,$http,$location) {
 
   var app=$scope;
 

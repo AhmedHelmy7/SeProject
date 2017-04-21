@@ -4,7 +4,8 @@ var bcrypt=require('bcryptjs');
 var UserSchema=new Schema(
     {   
         name:{
-            type:String
+            type:String,
+            required:true
              /*required: true*/
         },
         email:{
@@ -24,10 +25,6 @@ var UserSchema=new Schema(
     {
         type: Boolean
     },
-    price:
-    {
-        type: Number
-    },
         username:{
             type:String,
             lowercase:true,
@@ -38,7 +35,11 @@ var UserSchema=new Schema(
             type:String,
             required:true
         },
-	creditCardNumber :{type:String},
+	creditCardNumber :
+    {
+        type:String
+    },
+    
 	fav_list : [{
    	name: String,
   	location:String,

@@ -4,7 +4,7 @@ var User=require('../models/user');
 var passport = require('passport');
 const jwt = require('jsonwebtoken');
 var userController=require('../controllers/userController');
-const config = require('/home/anas/Desktop/SeProject-Anas/config/database.js');
+const config = require('//home/helmy/Desktop/SeProject-Anas/config/database.js');
 
 
 router.post('/register',(req,res,next)=>{
@@ -17,6 +17,18 @@ router.post('/register',(req,res,next)=>{
         isCompany:false
 
     });
+    userController.addUser(newUser,(err,user)=>{
+        if(err){
+                console.log(err);
+        
+            res.json({success:false,msg:'Failed to register user'});
+
+        }else{
+            res.json({success:true,msg:'user registered '});
+
+        }
+    });
+});
     router.post('/registerComp',(req,res,next)=>{
     let newUser = new User({
         name:req.body.name,
@@ -24,7 +36,6 @@ router.post('/register',(req,res,next)=>{
         username:req.body.username,
         password:req.body.password,
         location:req.body.location,
-        price:req.body.price,
         isCompany:true
     });
     userController.addUser(newUser,(err,user)=>{
@@ -79,4 +90,4 @@ router.post('/login',(req,res,next)=>{
     })
 });
 
-module.exports=router
+module.exports=router;
