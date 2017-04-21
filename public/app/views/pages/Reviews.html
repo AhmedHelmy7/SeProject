@@ -1,7 +1,7 @@
-<div ng-controller="reviewCtrl">
+<div ng-controller="reviewCtrl"> <!--this html file represents the page where users can view the reviews regarding companies,and can write their own reviews. using the controller-->
 
   <br>
-
+<!--retrieving all the reviews from the database and showing them upon opening this page-->
   <ol>
         <li class="list-group-item" ng-repeat="Object in reviews">
           {{"Client name:  "+Object.client+"  Title:  "+Object.title+"  Content: "+Object.content}}
@@ -17,7 +17,7 @@
 <div>
     <h1>Add your Review</h1>
 </div>
-
+<!--taking the input from the user and sending it to the controller where it calls the backend methods to post a new review using this input values-->
 <form ng-submit="revCtrl.revUser(Data);">
 
 <input class="form-control" type="text" name="_id" placeholder="please write id" ng-model="revCtrl.Data.activity">
