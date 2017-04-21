@@ -1,4 +1,5 @@
 let User=require('../models/user');
+let reviews = ('../models/reviews');
 let bcrypt =require('bcryptjs');
 
 let userController={
@@ -28,35 +29,35 @@ let userController={
     },
 
 adminBan:function(req, res) {
-  User.findOneAndUpdate({username:req.body.username},{isBanned:true},{},function(err, res){
+  User.findOneAndUpdate({username:req.body.username},{isBanned:true},{},function(err){
     // End session
   if (err) {
-                throw err;
+                return res.json({success:false,msg:'Error Occured, User not banned !'})
             } else {
-                console.log('Banned');
+                 return res.json({success:true,msg:'Banned successfully'})
            }
 });
 },
 
 adminDeban:function(req, res) {
 if(!req.body.isAdmin)
-  User.findOneAndUpdate({username:req.body.username},{isBanned:false},{},function(err, res){
+  User.findOneAndUpdate({username:req.body.username},{isBanned:false},{},function(err){
     // End session
   if (err)
-        throw err;
+        return res.json({success:false,msg:'Error Occured, Unbanning failed !'})
   else 
-        console.log('Debanned');
+         return res.json({success:true,msg:'Unbanned successfully'})
 });
 },
 
 
 deleteReview:function(req,res) {
-  reviews.findOneAndRemove({id:req.body.id},{}, function(err, res){
+  reviews.findOneAndRemove({id:req.body.id},{}, function(err){
     // End session
   if (err)
-        throw err;
+        return res.json({success:false,msg:'Error Occured, Deletion failed !'})
   else 
-        console.log('Debanned');
+         return res.json({success:true,msg:'Review deleted successfully'})
 });
 }
 }

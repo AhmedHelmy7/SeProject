@@ -20,29 +20,17 @@
 </form>
 
 
-<!-- Registration Form -->
-
 <br>
 
-<!-- Loading Icon -->
-<div class="jumbotron text-center" ng-show="register.loading">
-    <span class="glyphicon glyphicon-repeat spinner"></span>
-    <p>Loading....</p>
+<!-- Successful Ban Message -->
+<div class="row show-hide-message" ng-show="ban.successMsg">
+    <div class="alert alert-success">{{ ban.successMsg }}</div>
 </div>
-<!-- Loading Icon -->
+<!-- Failure Ban Message -->
 
 <br>
 
-<!-- Successful Registration Message -->
-<div class="row show-hide-message" ng-show="register.successMsg">
-    <div class="alert alert-success">{{ register.successMsg }}</div>
-</div>
-<!-- Successful Registration Message -->
-
-<br>
-
-<!-- Failed Registration Message -->
-<div class="row show-hide-message" ng-show="register.errorMsg">
-    <div class="alert alert-danger">{{ register.errorMsg }}</div>
+<div class="row show-hide-message" ng-show="ban.errorMsg">
+    <div class="alert alert-danger">{{ ban.errorMsg }}</div>
 </div>
 <!-- Failed Registration Message -->
