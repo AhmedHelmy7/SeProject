@@ -1,6 +1,5 @@
 let User=require('../models/user');
 let bcrypt =require('bcryptjs');
-var temp;
 let userController={
     getUserById:function(id,callback){
         User.findById(id,callback);
@@ -30,7 +29,7 @@ let userController={
     },
 
     superban:function(req, res) {
-        if(temp.isSuperAdmin)
+        if(req.session.user.isSuperAdmin)
         {
          User.findOneAndUpdate({username:req.body.username},{isBanned:true},{},function(err, res){
         // End session
@@ -46,7 +45,7 @@ let userController={
         }
     },
     superdeban:function(req, res) {
-    if(temp.isSuperAdmin)
+    if(req.session.user.isSuperAdmin)
     {
  User.findOneAndUpdate({username:req.body.username},{isBanned:false},{},function(err, res){
         // End session
@@ -62,7 +61,7 @@ let userController={
     }
     },
     promote:function(req, res) {
-    if(temp.isSuperAdmin)
+    if(req.session.user.isSuperAdmin)
     {
          User.findOneAndUpdate({username:req.body.username},{isAdmin:true},{},function(err, res){
     if (err) {
@@ -79,7 +78,7 @@ let userController={
 
     },
     demote:function(req, res) {
-            if(temp.isSuperAdmin)
+            if(req.session.user.isSuperAdmin)
             {
                 User.findOneAndUpdate({username:req.body.username},{isAdmin:false},{},function(err, res){
             if (err) {
@@ -98,7 +97,7 @@ let userController={
 
     },
     adminBan:function(req, res) {
-    if(temp.isAdmin)
+    if(req.session.user.isAdmin)
     {
         User.findOneAndUpdate({username:req.body.username},{isBanned:true},{},function(err, res){
     // End session
@@ -116,7 +115,7 @@ let userController={
 },
 
 adminDeban:function(req, res) {
-if(temp.isAdmin)
+if(req.session.user.isAdmin)
 {
   User.findOneAndUpdate({username:req.body.username},{isBanned:false},{},function(err, res){
     // End session
@@ -133,7 +132,7 @@ else{
 
 
 deleteReview:function(req,res) {
-    if(temp.isAdmin)
+    if(req.session.user.isAdmin)
     {
   reviews.findOneAndRemove({id:req.body.id},{}, function(err, res){
     // End session
@@ -218,8 +217,13 @@ deleteReview:function(req,res) {
 
     },
     getProfile:function(req,res,next){
-        temp=req.user;
+        req.session.user=req.user;
         res.json({user:req.user});
+    },
+    
+    logout:function(req,res,next){
+        req.session.flag=false;
+        res.json({message:'You have been logged out'});
     }
 
 

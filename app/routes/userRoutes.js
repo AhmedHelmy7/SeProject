@@ -95,5 +95,6 @@ router.put('/getSubList/:id',userController.getSubList);
 
 router.get('/profile', passport.authenticate('jwt', {session:false}),userController.getProfile);
 
+router.get('/logout',userController.logout)
 module.exports=router
 

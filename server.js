@@ -6,6 +6,7 @@ const passport=require('passport');
 const mongoose=require('mongoose');
 const morgan=require('morgan');
 const expressValidator = require('express-validator');
+const session = require('express-session');
 
 var DB_URI = "mongodb://localhost:27017/finalProject";
 var session=require('express-session');
@@ -56,7 +57,11 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(session({
+    secret:'super secret',
+   
+    cookie:{maxAge:60000}
+}));
 require('./config/passport')(passport);
 app.use('/activities', activityroutes);
 app.use('/users',users);

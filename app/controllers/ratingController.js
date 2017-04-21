@@ -4,9 +4,11 @@ let RegisteredUser = require('../models/user')
 let ratingController = {
     //add rating function that creates a new rating in the ratings collection and adds its id in the array list of the corresponding activity and calculates the avgRating of that activity
     addRating: function(req, res) {
+        var sess=req.session;
+
         let rating = new Rating({
             activityID:req.body.activityID,
-            registeredUserID:req.body.registeredUserID,
+            registeredUserID:sess.user._id,
              rating:req.body.rating
         });       
         Rating.create(rating,function(err, acc) {
