@@ -2,6 +2,7 @@ let User = require('../models/user');
 let bcrypt = require('bcryptjs');
 let Activity = require('../models/Activity');
 
+
 var temp;
 var temp2;
 let userController = {
@@ -209,7 +210,6 @@ let userController = {
         var Activ = new Activity;
         console.log(temp.username);
 
-
         Activ.companyName = temp.username;
 
         Activ.Name = req.body.Name;
@@ -300,8 +300,11 @@ let userController = {
         });
     },
     updateActivity: (req, res) => {
-        var id = req.params._id;
+        console.log('hola');
+        var id = req.params.id;
+
         var query = { _id: id };
+        console.log(req.body);
         var update = {
             Name: req.body.Name,
             StartDate: req.body.StartDate,
@@ -310,6 +313,24 @@ let userController = {
             numberOfApplicatons: req.body.numberOfApplicatons
                 //        image_url: book.image_url,
                 //        buy_url: book.buy_url
+        }
+        Activity.findOneAndUpdate(query, update, {}, function(err, res) {
+            if (err) {
+                throw err;
+            } else {
+                console.log('Updated');
+            }
+        });
+    },
+    updateName: (req, res) => {
+        console.log('holahere');
+        var id = req.params._id;
+        var query = { _id: id };
+        console.log(req.body);
+        var update = {
+            Name: req.body.Name,
+            //        image_url: book.image_url,
+            //        buy_url: book.buy_url
         }
         Activity.findOneAndUpdate(query, update, {}, function(err, res) {
             if (err) {

@@ -1,16 +1,9 @@
 angular.module('editActivityCtrl', [])
-    .controller('editActivityCtrl', function($scope) {
+    .controller('editActivityCtrl', function($scope, $http, $routeParams) {
         $scope.nameTab = 'active';
         $scope.phase1 = true;
-
-        $scope.getName = function(newName) {
-            console.log('hola');
-            $http.get('/users/view/' + $routeParams.id).then(function(response) {
-                if (data.data.success) {
-                    $scope.newName = data.data.user.Name
-                }
-            })
-        }
+        $scope.selectedName = '';
+        $scope.bb = '';
 
         $scope.namePhase = function() {
             $scope.nameTab = 'active';
@@ -103,10 +96,51 @@ angular.module('editActivityCtrl', [])
             $scope.phase5 = false;
             $scope.phase6 = true;
         };
-        $scope.updateName = function(newName) {
-            /* $http.put('/users/edit/:_id', this.regData).then(function(data) {
 
-                    }
-*/
+        $http.get('/users/Activities').then(function(response) {
+            //console.log(response);
+            $scope.contactlist = response.data;
+            $scope.contact = "";
+        });
+
+        okok = function() {
+            var temp = $routeParams.id;
+            // console.log('hola1');
+            $http.get('/users/view/' + temp).then(function(response) {
+
+                $scope.selectedName = response.data[0].Name;
+                $scope.bb = response.data[0].Name;
+                $scope.Name = $scope.bb;
+
+                fill();
+            })
         }
+        okok();
+        fill = function() {
+            $scope.Name = $scope.bb;
+            console.log($scope.Name)
+        }
+
+        $scope.updateName = function(Name) {
+            console.log('hey');
+            //console.log(this.regData);
+            //console.log(this.regData);
+            //     $scope.Name = this.bb;
+            var id = $routeParams.id;
+            //   $scope.newName = $scope.bb;
+
+            //  this.Name = $scope.Name;
+            //  console.log($scope.selectedName);
+            console.log($scope.Name);
+            if ($scope.Name == null) {
+                $scope.Name = this.Name;
+            }
+            console.log(this.Name);
+            console.log($scope.Name);
+            $http.post('/users/edit/' + id, Name).then(function(data) {
+                console.log(data);
+            });
+        }
+
+
     });

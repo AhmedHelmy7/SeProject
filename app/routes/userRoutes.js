@@ -101,7 +101,8 @@ router.put('/Activities/:_id', userController.deleteActivity);
 
 router.get('/trash', userController.searchDeleted);
 
-router.put('/edit/:_id', userController.updateActivity);
+router.post('/edit/:_id', userController.updateName);
+
 
 router.put('/update/:_id', userController.activateActivity);
 

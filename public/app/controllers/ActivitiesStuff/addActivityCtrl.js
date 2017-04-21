@@ -4,8 +4,8 @@ angular.module('addActivityCtrl', [])
         var app = this
         this.addActivity = function(regData) {
             app.errorMsg = false;
-            /*    console.log('works?2')
-                console.log(this.regData);*/
+            //    console.log('works?2')
+            //console.log(this.regData);
             $http.post('/users/addActivities', this.regData).then(function(data) {
                 console.log(data.data.message);
                 if (data.data.success) {
