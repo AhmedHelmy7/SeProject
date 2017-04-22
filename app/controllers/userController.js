@@ -29,6 +29,9 @@ let userController={
     },
 
 adminBan:function(req, res) {
+  if(req.body.username == null || req.body.username=='')
+    return res.json({success:false,msg:'Please, Enter Username !'}) 
+ else{
   User.findOneAndUpdate({username:req.body.username},{isBanned:true},{},function(err){
     // End session
   if (err) {
@@ -37,9 +40,14 @@ adminBan:function(req, res) {
                  return res.json({success:true,msg:'Banned successfully'})
            }
 });
+}
 },
 
 adminDeban:function(req, res) {
+
+if(req.body.username == null || req.body.username=='')
+  return res.json({success:false,msg:'Please, Enter Username !'})  
+else {
 if(!req.body.isAdmin)
   User.findOneAndUpdate({username:req.body.username},{isBanned:false},{},function(err){
     // End session
@@ -48,6 +56,7 @@ if(!req.body.isAdmin)
   else 
          return res.json({success:true,msg:'Unbanned successfully'})
 });
+}
 },
 
 
