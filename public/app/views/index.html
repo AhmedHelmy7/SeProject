@@ -3,37 +3,36 @@
 
 <head>
     <base href="/">
-
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <title>Best Project</title>
 
-    <title>Theme Template for Bootstrap</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../libs/bootstrap/dist/css/bootstrap.min.css">
+    <!-- JS -->
+    <script src="../../libs/angular/angular.min.js"></script>
+    <script src="../../libs/angular-route/angular-route.min.js"></script>
 
-    <!-- Main Angular Files -->
-    <script src="assets/js/angular.js"></script>
-    <script src="assets/js/angular-route.js"></script>
+    <script src="../../libs/jquery/dist/jquery-3.2.1.min.js"></script>
+    <script src="../../libs/bootstrap/dist/js/bootstrap.js"></script>
 
+    <script src="../../app/app.js"></script>
+    <script src="../../app/appRoutes.js"></script>
 
-    <!-- Angular Config/Routes -->
-    <script src="app/app.js"></script>
-    <script src="app/routes.js"></script>
+    <!--Angular Controllers!-->
+    <script src="../../app/controllers/RegisterCtrl.js"></script>
+    <script src="../../app/controllers/RegisterCompCtrl.js"></script>
+    <script src="../../app/controllers/mainCtrl.js"></script>
+    <script src="../../app//services/authServices.js"></script>
+    <script src="../../app//controllers/ActivitiesStuff/addActivityCtrl.js"></script>
+    <script src="../../app//controllers/ActivitiesStuff/Activities.js"></script>
+    <script src="../../app//controllers/ActivitiesStuff/DeletedActivities.js"></script>
+    <script src="../../app//controllers/ActivitiesStuff/editActivity.js"></script>
 
-    <!-- Angular Config/Controller -->
-    <script src="app/controllers/ActivitiesStuff/addActivityCtrl.js"></script>
-    <script src="app/controllers/ActivitiesStuff/Activities.js"></script>
-    <script src="app/controllers/ActivitiesStuff/editActivity.js"></script>
-    <script src="app/controllers/ActivitiesStuff/DeletedActivities.js"></script>
 
 </head>
 
-<body ng-app="userApp">
-    <!-- Fixed navbar -->
+<body ng-app="sampleApp" ng-controller="mainCtrl as main">
+
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -43,29 +42,21 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-                <a class="navbar-brand" href="#">Bootstrap theme</a>
+                <a class="navbar-brand" href="#">Profile Viewer</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="/">Home</a></li>
-                    <li><a href="AddActivity">AddActivity</a></li>
-                    <li><a href="Activities">Activities</a></li>
-                    <li><a href="Trash">DeletedActivities</a></li>
+                    <li><a ng-show="!main.isLoggedIn" href="/login">Login</a></li>
+                    <li><a ng-show="!main.isLoggedIn" href="/register">Register</a></li>
+                    <li><a ng-show="main.isLoggedIn && main.isCompany" href="AddActivity">AddActivity</a></li>
+                    <li><a ng-show="main.isLoggedIn && main.isCompany" href="Activities/{{main.username}}">Activities</a></li>
 
+                    <li><a ng-show="main.isLoggedIn && main.isCompany" href="Trash">Deleted Activities</a></li>
+                    <li><a ng-show="main.isLoggedIn && main.isCompany" href="Activities/{{main.username}}">Activities</a></li>
 
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <li><a ng-show="main.isLoggedIn" href="#" ng-click="main.logout()">Logout</a></li>
 
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li class="dropdown-header">Nav header</li>
-                            <li><a href="#">Separated link</a></li>
-                            <li><a href="#">One more separated link</a></li>
-                        </ul>
-                    </li>
                 </ul>
             </div>
             <!--/.nav-collapse -->
@@ -74,17 +65,14 @@
 
     <div class="container theme-showcase" role="main">
 
-        <!-- Main jumbotron for a primary marketing message or call to action -->
         <div class="jumbotron">
-            <h1>Team Name Pending</h1>
+            <h1>TESTING</h1>
         </div>
-
-
-        <div ng-view></div>
-
     </div>
-    <script src="assets/js/jquery-3.2.1.min.js"></script>
-    <script src="assets/js/bootstrap.js"></script>
+
+    <div ng-view></div>
+
+
 </body>
 
 </html>

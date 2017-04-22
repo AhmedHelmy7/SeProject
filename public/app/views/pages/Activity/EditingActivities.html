@@ -42,13 +42,13 @@
 
 !-->
 
-<form ng-submit="updateName(Name)">
+<form ng-submit="editActivityCtrl.updateName(Name)">
 
-    <p>{{bb}}</p>
     <label ng-show="phase1">Name:</label>
-    <input class="form-control" type="text" name: "Name" ng-model="Name">
+    <input class="form-control" type="text" name: "Name" ng-model="editActivityCtrl.Name">
     <br> {{Name}}
-    <button class="btn btn-primary" type="submit">Update</button>
+
+    <button class="btn btn-primary" type="submit">Update</button> {{Name}}
 </form>
 <!--
     <label ng-show="phase2">Description:</label>

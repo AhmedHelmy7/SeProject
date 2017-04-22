@@ -1,5 +1,5 @@
-angular.module('userApp', ['appRoutes', 'addActivityCtrl', 'ActivitiesCtrl', 'editActivityCtrl', 'deletedActivityCtrl'])
+angular.module('sampleApp', ['ngRoute', 'appRoutes', 'RegisterCtrl', 'mainCtrl', 'RegisterCompCtrl', 'authServices', 'addActivityCtrl', 'ActivitiesCtrl', 'deletedActivityCtrl', 'editActivityCtrl'])
 
-.config(function() {
-    console.log('testing app')
+.config(function($httpProvider) {
+    $httpProvider.interceptors.push('AuthInterceptors');
 });

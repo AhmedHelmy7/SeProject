@@ -74,5 +74,4 @@ var ActivitySchema = new Schema({
     }
 
 });
-
 const Activity = module.exports = mongoose.model('activities', ActivitySchema);

@@ -2,12 +2,13 @@ angular.module('addActivityCtrl', [])
     .controller('addActivityCtrl', function($http, $location, $timeout) {
 
         var app = this
-        this.addActivity = function(regData) {
+        this.addActivity = function(regData, bb) {
             app.errorMsg = false;
-            //    console.log('works?2')
-            //console.log(this.regData);
-            $http.post('/users/addActivities', this.regData).then(function(data) {
-                console.log(data.data.message);
+            //console.log(bb);
+            this.regData.username = bb;
+
+            console.log(this.regData);
+            $http.post('/activities/addActivities/', this.regData).then(function(data) {
                 if (data.data.success) {
                     //once data is inserted
                     app.successMsg = data.data.message + "....Redirecting";
@@ -17,10 +18,7 @@ angular.module('addActivityCtrl', [])
                     }, 2000);
                 } else {
                     app.errorMsg = data.data.message
-
                 }
-
-                //  console.log('Yees!')
             });
         }
     });

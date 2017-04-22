@@ -5,19 +5,12 @@ const cors = require('cors');
 const passport = require('passport');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
-const expressValidator = require('express-validator');
-
-var DB_URI = "mongodb://localhost:27017/finalProject";
 var session = require('express-session');
+const expressValidator = require('express-validator');
 const app = express();
-const users = require('../SeProject/app/routes/userRoutes');
-const activityroutes = require('./app/routes/activityRoutes');
-const ads = require('../SeProject/app/routes/adRoutes');
-const main = require('../SeProject/app/routes/mainRouter');
-var reviewrouter = require('./app/routes/reviewRoutes');
-const port = 8097;
 
-// start the server
+
+//mongodb connection
 mongoose.connect('mongodb://localhost:27017/finalProject', function(err) {
     if (err) {
         console.log('not connected')
@@ -25,6 +18,11 @@ mongoose.connect('mongodb://localhost:27017/finalProject', function(err) {
         console.log('success on db connection');
     }
 });
+
+//routes
+const users = require('./app/routes/userRoutes');
+const activityroutes = require('./app/routes/activityroutes');
+
 
 //express valiator Middleware
 app.use(expressValidator({
@@ -44,27 +42,41 @@ app.use(expressValidator({
     }
 }));
 
-//app.use('./users',users);
 
 app.use(cors());
 app.use(express.static(__dirname + '/public'));
 //app.use(session({secret:"ronaldo",resave:false,saveUninitialized:true}));
 app.use(morgan('dev'));
+app.use(session({
+    secret: 'super secret',
+
+    cookie: { maxAge: 60000 }
+}));
+
+//body parser 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
+
+//passport connection
 app.use(passport.initialize());
 app.use(passport.session());
 require('./config/passport')(passport);
-app.use('/activities', activityroutes);
-app.use('/users', users);
-app.use('/review', reviewrouter);
-app.use('/ads', ads);
-app.use('/main', main);
 
+
+//routes connection
+app.use('/users', users);
+app.use('/activities', activityroutes);
+
+
+
+// frontend routes
 app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname + '/public/app/views/index.html'));
+    res.sendFile(path.join(__dirname + '/public/app/views/index.html')); //respond to the route request with the html file.
 });
+
+
+//connection
+const port = 8081;
 app.listen(port, function() {
     console.log('Running on port ' + port);
 });
-//27017q

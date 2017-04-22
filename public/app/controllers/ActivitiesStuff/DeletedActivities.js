@@ -1,38 +1,43 @@
-angular.module('deletedActivityCtrl', [])
-    .controller('deletedActivityCtrl', function($http, $scope) {
+angular.module('deletedActivityCtrl', ['authServices'])
+    .controller('deletedActivityCtrl', function(Auth, $http, $scope) {
         $scope.contactlist = [];
         $scope.limit = 5;
         $scope.selectedRow = 0;
         $scope.selectedActivity = null;
 
         $scope.temp1 = null;
-        $http.get('/users/trash').then(function(response) {
-            $scope.contactlist = response.data;
-            $scope.contact = "";
-        });
+
+        $scope.show = false;
+
+        Auth.getUser().then(function(data) {
+            this.o = data.data._doc.username;
+
+            $http.get('/activities/trash/' + this.o).then(function(response) {
+
+                $scope.contactlist = response.data;
+                console.log(response.data);
+                $scope.contact = "";
+            });
+        })
 
         $scope.setClickedRow = function(Activity, index) {
+            $scope.show = true;
+
             $scope.selectedRow = index;
-            // console.log(Activity);
             $scope.temp1 = Activity;
 
-            // console.log('/users/view/' + Activity)
-            $http.get('/users/view/' + Activity).then(function(response) {
-                //     console.log(response.data);
+            $http.get('/activities/view/' + Activity).then(function(response) {
                 $scope.selectedActivity = response.data;
 
             })
 
-            console.log($scope.selectedActivity)
         }
         $scope.deleteActivity = function(_id, index) {
 
-            //             console.log('hola');
+            console.log('hola5');
             // $scope.refresh();
             $scope.contactlist.splice(index, 1);
-            $http.put('/users/update/' + _id).then(function(data) {
-
-            })
+            $http.put('/activities/update/' + _id);
         }
 
     });

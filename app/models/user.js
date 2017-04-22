@@ -3,17 +3,20 @@ var Schema = mongoose.Schema;
 var bcrypt = require('bcryptjs');
 var UserSchema = new Schema({
     name: {
-        type: String
-            /*required: true*/
+        type: String,
+        //   required:true
+        /*required: true*/
     },
     email: {
         type: String,
-        required: true,
-        lowercase: true,
+        //   required:true,
         unique: true
     },
-    category: {
-        type: String
+    passOfEmail: {
+        type: String,
+        //   required:true,
+        unique: true
+
     },
     location: {
         type: String
@@ -23,17 +26,23 @@ var UserSchema = new Schema({
         //i make it as  a default
         default: ["teamnamepending123456@gmail.com", "davidonsy123@gmail.com", "david.abdelmalak@student.guc.edu.eg"]
     },
+    isCompany: {
+        type: Boolean
+    },
     username: {
         type: String,
-        lowercase: true,
-        required: true,
+        // lowercase: true,
+        //  required:true,
         unique: true
     },
     password: {
         type: String,
-        required: true
+        //required:true
     },
-    creditCardNumber: { type: String },
+    creditCardNumber: {
+        type: String
+    },
+
     fav_list: [{
         name: String,
         location: String,
@@ -53,7 +62,6 @@ var UserSchema = new Schema({
     isSuperAdmin: {
         type: Boolean,
         default: false
-    },
-    isCompany: { type: String, default: 'user' }
+    }
 });
 const User = module.exports = mongoose.model('User', UserSchema);

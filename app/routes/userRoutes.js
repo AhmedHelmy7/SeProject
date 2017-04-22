@@ -4,9 +4,8 @@ var User = require('../models/user');
 var passport = require('passport');
 const jwt = require('jsonwebtoken');
 var userController = require('../controllers/userController');
-const config = require('../../config/database.js');
-var session = require('express-session');
-var flag = false;
+const config = require('/home/davidabdelmalek/Downloads/final/SeProject-Anas/config/database.js');
+
 
 router.post('/register', (req, res, next) => {
     let newUser = new User({
@@ -14,100 +13,129 @@ router.post('/register', (req, res, next) => {
         email: req.body.email,
         username: req.body.username,
         password: req.body.password,
-        isAdmin: req.body.isAdmin,
-        isBanned: req.body.isBanned
+        creditCardNumber: req.body.creditCardNumber,
+        isCompany: false
     });
-
     userController.addUser(newUser, (err, user) => {
-        if (err) {
-            res.json({ success: false, msg: 'Failed to register user' });
-
+        if (req.body.email == '' || req.body.email == null || req.body.name == null || req.body.name == '' || req.body.username == null || req.body.username == '' || req.body.password == '' || req.body.password == null) {
+            res.json({ success: false, message: 'please enter the missing field(s)' })
+                //            console.log(err.name);
         } else {
-            res.json({ success: true, msg: 'user registered ' });
+            if (err) {
+                console.log(err);
+                res.json({ success: false, message: 'Username or Email already exists' });
+            } else {
 
+                res.json({ success: true, msg: 'user registered ' });
+            }
+        }
+    });
+});
+router.post('/registerComp', (req, res, next) => {
+    let newUser = new User({
+        name: req.body.name,
+        email: req.body.email,
+        username: req.body.username,
+        password: req.body.password,
+        location: req.body.location,
+        isCompany: true,
+        passOfEmail: req.body.passOfEmail
+    });
+    userController.addUser(newUser, (err, user) => {
+        if (req.body.location == '' || req.body.location == null || req.body.email == null || req.body.email == '' || req.body.name == null || req.body.name == '' || req.body.username == null || req.body.username == '' || req.body.password == '' || req.body.password == null) {
+            res.json({ success: false, message: 'Ensure entities' })
+        } else {
+            if (err) {
+                console.log(err);
+                res.json({ success: false, msg: 'Username or Email already exists' });
+
+            } else {
+                //     console.log(req.session);
+                req.session.user = newUser;
+                req.session.flag = true;
+                //     console.log(req.session);
+                res.json({ success: true, msg: 'user registered ' });
+
+            }
         }
     });
 });
 
-
+//Login in controller
 router.post('/login', (req, res, next) => {
-    if (!flag) {
-        const username = req.body.username;
-        const password = req.body.password;
-        //var sess=req.session;
+    const username = req.body.username;
+    const password = req.body.password;
 
-        userController.getUserByUsername(username, (err, user) => {
+
+    userController.getUserByUsername(username, (err, user) => {
+        if (err) throw err;
+        if (!user) {
+            return res.json({ success: false, msg: 'user not found' })
+        }
+        userController.comparePassword(password, user.password, (err, isMatch) => {
             if (err) throw err;
-            if (!user) {
-                return res.json({ success: false, msg: 'user not found' })
-            }
-            userController.comparePassword(password, user.password, (err, isMatch) => {
-                if (err) throw err;
-                if (isMatch) {
+            if (isMatch) {
+                //                console.log(user);
+                /*   req.session.user = user;
+                   req.session.flag = true;*/
+                // console.log(req.session.user);
 
-                    if (!user.isBanned) {
-                        flag = true;
-                        const token = jwt.sign(user, config.secret, {
-                            expiresIn: 604800 // 1 week
+                var token = jwt.sign(user, config.secret, {
+                    expiresIn: 604800 // 1 week
 
-                        })
-                        res.json({
-                            success: true,
-                            token: 'JWT ' + token,
-                            user: {
-                                id: user._id,
-                                name: user.name,
-                                username: user.username,
-                                email: user.email
-                            }
+                })
+                console.log(token)
+                if (!user.isBanned) {
+                    req.session.user = user;
+                    req.session.flag = true;
+                    console.log(req.session.user);
+                    //to save the data of user;
+                    const token = jwt.sign(user, config.secret, {
+                        expiresIn: 604800 // 1 week
+                    })
+                } else {
+                    return res.json({ success: false, msg: 'You are banned from the server' })
+                }
 
-                        })
-                    } else {
-                        return res.json({ success: false, msg: 'You are banned from the server' })
+                res.json({
+                    success: true,
+                    token: token,
+                    user: {
+                        id: user._id,
+                        name: user.name,
+                        username: user.username,
+                        email: user.email
                     }
 
-
-                } else {
-                    return res.json({ success: false, msg: 'Wrong password' })
-                }
-            })
+                })
+            } else {
+                return res.json({ success: false, msg: 'Wrong password' })
+            }
         })
-    } else {
-        return res.json({ success: false, msg: 'You are already logged in,please signout first' })
-    }
+    })
 });
-//superadmin Routes
-router.put('/superban', userController.superban);
-router.put('/superdeban', userController.superdeban);
-router.put('/promote', userController.promote);
-router.put('/demote', userController.demote);
-//admin routes
-router.put('/adminban', userController.adminBan);
-router.put('/admindeban', userController.adminDeban);
-router.post('/deleteReview', userController.deleteReview);
 
-router.put('/editProfile/:id', userController.editProfile);
+router.use(function(req, res, next) {
+    var token = req.body.token || req.body.query || req.headers['x-access-token'];
+    // console.log(req.headers['x-access-token']);
+    if (token) {
 
-router.put('/ addToFavourites/:id', userController.addToFavourites);
-router.put('/getSubList/:id', userController.getSubList);
+        jwt.verify(token, config.secret, function(err, decoded) {
+            if (err) {
+                //           console.log(token);
+                //          console.log(decoded);
+                res.json({ success: false, message: "Token inValid" })
+            } else {
+                req.decoded = decoded;
+                next();
+            }
+        });
+    } else {
+        res.json({ success: false, message: "No Token provided" });
+    }
+})
 
-//add Activities by entering Name of Company
-router.post('/addActivities', userController.addActivities);
-
-//get All Activities
-router.get('/Activities', userController.searchActivity);
-
-router.put('/Activities/:_id', userController.deleteActivity);
-
-router.get('/trash', userController.searchDeleted);
-
-router.post('/edit/:_id', userController.updateName);
-
-
-router.put('/update/:_id', userController.activateActivity);
-
-router.get('/view/:_id', userController.viewActivity);
-
-router.get('/profile', passport.authenticate('jwt', { session: false }), userController.getProfile);
-
-module.exports = router
+router.post('/me', function(req, res) {
+    res.send(req.decoded);
+})
+module.exports = router;
