@@ -1,5 +1,6 @@
 let User=require('../models/user');
 let bcrypt =require('bcryptjs');
+let Review = require('../models/reviews');
 var temp;
 let userController={
     getUserById:function(id,callback){
@@ -135,12 +136,12 @@ else{
 deleteReview:function(req,res) {
     if(temp.isAdmin)
     {
-  reviews.findOneAndRemove({id:req.body.id},{}, function(err, res){
+  Review.findOneAndRemove({id:req.body.id},{}, function(err, res){
     // End session
   if (err)
         throw err;
   else 
-        console.log('Debanned');
+        console.log('Deleted');
 });
     }
     else{
@@ -227,14 +228,22 @@ myFavourites:function(req, res)
         })
 
     },
-    mySubscribers:function(req, res) {
-    User.findById(temp.id,function(err,user){
+    viewCompanies:function(req, res) {
+    User.find({ 'isCompany': 'true'},function(err,companies){
+        if(err)
+         throw err;
+         else
+         res.json(companies);
+    })
+},
+        mySubscribers:function(req, res) {
+        User.findById(temp.id,function(err,user){
         if(err)
          throw err;
          else
          res.json(user.sub_List);
     })
-    },
+        },
     getProfile:function(req,res,next){
         temp=req.user;
         res.json({user:req.user});

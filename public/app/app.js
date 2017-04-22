@@ -1,1 +1,1 @@
-angular.module('myApp',['appRoutes']);
+angular.module('myApp',['appRoutes','myFavouritesctrl','subListctrl','homectrl','RegisterCtrl', 'LoginCtrl','RegisterCompCtrl','compctrl','userControllersEmad','userControllersOmar']);

@@ -16,11 +16,9 @@ let reviewsController = {
         });
     },
     addReviews: function(req, res) {
-        console.log('DAk');
         var revs = new Review;
 
         revs.activity = req.params._id;
-
         /////SESSION NEEDED
         revs.client = req.session.username;
         revs.content = req.body.content;

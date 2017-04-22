@@ -14,7 +14,7 @@ router.post('/register',(req,res,next)=>{
         email:req.body.email,
         username:req.body.username,
         password:req.body.password
-    });
+        });
 
     userController.addUser(newUser,(err,user)=>{
         if(err){
@@ -26,8 +26,27 @@ router.post('/register',(req,res,next)=>{
         }
     });
 });
+router.post('/registerComp',(req,res,next)=>{
+    let newUser = new User({
+        name:req.body.name,
+        email:req.body.email,
+        username:req.body.username,
+        password:req.body.password,
+        location:req.body.location,
+        isCompany:true
+    });
+    userController.addUser(newUser,(err,user)=>{
+        if(err){
+                console.log(err);
+        
+            res.json({success:false,msg:'Failed to register user'});
 
+        }else{
+            res.json({success:true,msg:'user registered '});
 
+        }
+    });
+ });
 router.post('/login',(req,res,next)=>{
     if(!flag)
     {
@@ -43,7 +62,6 @@ router.post('/login',(req,res,next)=>{
         userController.comparePassword(password,user.password,(err,isMatch)=>{
             if(err)throw err;
             if(isMatch){
-                 
                 if(!user.isBanned)
                 {
                     flag=true;
@@ -91,7 +109,7 @@ router.put('/admindeban',userController.adminDeban);
 router.post('/deleteReview',userController.deleteReview);
 
 router.put('/editProfile',userController.editProfile);
-
+router.get('/viewCompanies',userController.viewCompanies);
 router.put('/addToFavourites',userController.addToFavourites);
 router.put('/getSubList',userController.getSubList);
 router.get('/myFavourites',userController.myFavourites);

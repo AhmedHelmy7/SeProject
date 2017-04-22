@@ -4,7 +4,8 @@ var bcrypt=require('bcryptjs');
 var UserSchema=new Schema(
     {   
         name:{
-            type:String
+            type:String,
+            required:true
              /*required: true*/
         },
         email:{
@@ -12,9 +13,6 @@ var UserSchema=new Schema(
             required:true,
             lowercase:true,unique:true
         },
-         category: {
-        type: String    
-                    },
      location: {
         type: String
     },
@@ -22,6 +20,10 @@ var UserSchema=new Schema(
         type: [String],
         //i make it as  a default
         default: ["teamnamepending123456@gmail.com", "davidonsy123@gmail.com", "david.abdelmalak@student.guc.edu.eg"]
+    },
+    isCompany:
+    {
+        type: Boolean
     },
         username:{
             type:String,
@@ -33,12 +35,17 @@ var UserSchema=new Schema(
             type:String,
             required:true
         },
-	creditCardNumber :{type:String},
+	creditCardNumber :
+    {
+        type:String
+    },
+    
 	fav_list : [{
    	name: String,
   	location:String,
-	price:Number     	
-}],
+	price:Number,
+   	date: Date
+     	}],
 
      sub_List:[{name :String}],
      isBanned :{type:Boolean

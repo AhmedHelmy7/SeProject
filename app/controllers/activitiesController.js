@@ -21,7 +21,7 @@ let activitiesController = {
 
         //console.log(places.find(category));       
         //activities.find({ companyName: companyName, flag: "0" }, callback);
-    },
+    },  
     searchDeleted: function(req, res) {
         var companyName = req.params.name;
         Activity.find({ companyName: companyName, flag: "1" }, function(err, acc) {
@@ -35,11 +35,11 @@ let activitiesController = {
     addActivities: function(req, res) {
         //console.log("enters addActivities")
         var Activ = new Activity({
-            companyName:req.body.companyName,
+            companyName:req.session.user.username,
             Name:req.body.Name,
             numberOfApplicatons:req.body.numberOfApplicatons
         });
-
+        
         //Activ.companyName = req.body.CompanyName
 
 

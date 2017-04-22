@@ -56,7 +56,11 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(session({
+    secret:'super secret',
+   
+    cookie:{maxAge:60000}
+}));
 require('./config/passport')(passport);
 app.use('/activities', activityroutes);
 app.use('/users',users);
