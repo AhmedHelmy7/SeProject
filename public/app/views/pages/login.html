@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+  </head>
+  <body>
+    <h1>Login</h1>
+
+    <form ng-submit="login.doLogin(loginData);">
+
+      <label>Username:</label>
+      <input class="form-control" type="text" name="username" placeholder="please enter username" ng-model="login.loginData.username">
+      <br>
+      <label>Password:</label>
+      <input class="form-control" type="password" name="password" placeholder="please enter password" ng-model="login.loginData.password">
+      <br>
+
+      <button class="btn btn-primary" type="submit">Login</button>
+    </form>
+
+    <br>
+    <div class="row show-hide-message" ng-show="login.successMsg">
+        <div class="alert alert-success">{{login.successMsg}}</div>
+    </div>
+
+    <br>
+    <div class="row show-hide-message"  ng-show="login.errorMsg">
+        <div class="alert alert-danger">{{login.errorMsg}}</div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,1 @@
+angular.module('myApp',['appRoutes','myFavouritesctrl','subListctrl','homectrl','RegisterCtrl', 'LoginCtrl','RegisterCompCtrl','compctrl','userControllersEmad','userControllersOmar','userControllersIbrahim']);
