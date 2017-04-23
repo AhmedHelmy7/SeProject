@@ -1,0 +1,52 @@
+<div ng-controller="reviewCtrl"> <!--this html file represents the page where users can view the reviews regarding companies,and can write their own reviews. using the controller-->
+
+  <br>
+<!--retrieving all the reviews from the database and showing them upon opening this page-->
+  <ol>
+        <li class="list-group-item" ng-repeat="Object in reviews">
+          {{"Client name:  "+Object.client+"  Title:  "+Object.title+"  Content: "+Object.content}}
+        </li>
+  </ol>
+  <br>
+
+</div>
+
+
+
+
+<div>
+    <h1>Add your Review</h1>
+</div>
+<!--taking the input from the user and sending it to the controller where it calls the backend methods to post a new review using this input values-->
+<form ng-submit="revCtrl.revUser(Data);">
+
+<input class="form-control" type="text" name="_id" placeholder="please write id" ng-model="revCtrl.Data.activity">
+<input class="form-control" type="text" name="username" placeholder="please write username" ng-model="revCtrl.Data.client">
+
+    <input class="form-control" type="text" name="title" placeholder="please write a title" ng-model="revCtrl.Data.title">
+    <input class="form-control" type="text" name="content" placeholder="please write a review" ng-model="revCtrl.Data.content">
+    <br>
+
+    <button class="btn btn-primary" type="submit">Post</button>
+</form>
+
+<br>
+<div class="jumbotron text-center" ng-show="revCtrl.loading">
+  <span class="glyphicon glyphicon-repeat spinner"></span>
+  <P>Loading...</p>
+
+
+</div>
+
+ <!--ng show is used to make the success/error message box invisible until needed.-->
+<br>
+
+<div class="row show-hide-message" ng-show="revCtrl.successMsg">
+<div class ="alert alert-success">{{ revCtrl.successMsg }}</div>
+</div>
+
+<br>
+
+<div class="row show-hide-message" ng-show="revCtrl.errorMsg">
+<div class ="alert alert-danger">{{ revCtrl.errorMsg }}</div>
+</div>

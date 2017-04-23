@@ -1,0 +1,79 @@
+<div class="page-header">
+    <h1>Temp NOW BRUH!</h1>
+</div>
+<br>
+
+<!-- Bootstrap Navigation Tabs -->
+<ul class="nav nav-tabs">
+    <li role="presentation" ng-click="namePhase();" ng-class="nameTab"><a href="#">Name</a></li>
+    <li role="presentation" ng-click="StartDatPhase();" ng-class="StartDatTab"><a href="#">StartDate</a></li>
+    <li role="presentation" ng-click="EndDatePhase();" ng-class="EndDateTab"><a href="#">EndDate</a></li>
+    <li role="presentation" ng-click="LocationPhase();" ng-class="LocationTab"><a href="#">Location</a></li>
+    <li role="presentation" ng-click="numberOfApplicatonsPhase();" ng-class="numberOfApplicatonsTab"><a href="#">Number of Applications</a></li>
+    <li role="presentation" ng-click="descPhase();" ng-class="descTab"><a href="#">Description</a></li>
+</ul>
+
+
+<br>
+<br>
+
+
+<form ng-show="phase1" ng-submit="updateName(regData);">
+
+    <label>PreviousName:</label>{{bb}}
+    <br>
+    <br>
+    <label>newName:</label>
+    <input class="form-control" type="text " name: "Name " ng-model="regData.Name ">
+    </div>
+
+    <button class="btn btn-primary " type="submit ">AddActivity</button>
+</form>
+
+<form ng-show="phase2 " ng-submit="editActivityCtrl.updateName(regData.Name); ">
+
+
+    <label>Description:</label>
+    <input class="form-control " type="text " name: "desc " placeholder="please enter desc " ng-model="editActivityCtrl.regData.desc ">
+    <br>
+
+    <button class="btn btn-primary " type="submit ">AddActivity</button>
+</form>
+
+<form ng-show="phase3 " ng-submit="editActivityCtrl.updateName(regData.Name); ">
+
+
+    <label>location:</label>
+    <input class="form-control " type="text " name: "location " placeholder="please enter location " ng-model="editActivityCtrl.regData.location ">
+    <br>
+
+    <button class="btn btn-primary " type="submit ">AddActivity</button>
+</form>
+
+<form ng-show="phase4 " ng-submit="editActivityCtrl.updateName(regData.Name); ">
+
+    <label>numberOfApplications:</label>
+    <input class="form-control " type="text " name: "numberOfApplicatons " placeholder="please enter numberOfApplications " ng-model="editActivityCtrl.regData.numberOfApplicatons ">
+    <br>
+
+    <button class="btn btn-primary " type="submit ">AddActivity</button>
+</form>
+
+
+<!--
+    <label>password:</label>
+    <input class="form-control " type="password " name: "password " placeholder="please enter password " ng-model="register.regData.password ">
+    <br>
+    !-->
+
+
+<div class="row show-hide-message " ng-show="editActivityCtrl.successMsg ">
+    <div class="alert alert-success ">{{editActivityCtrl.successMsg}}</div>
+</div>
+
+<br>
+
+
+<div class="row show-hide-message " ng-show="editActivityCtrl.errorMsg ">
+    <div class="alert alert-danger ">{{editActivityCtrl.errorMsg}}</div>
+</div>
