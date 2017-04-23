@@ -1,17 +1,27 @@
 <!doctype html>
 <html ng-app="MainCtrl">
     <head>
-        <title>first try</title>
-    <script src="libs/angular/angular.min.js"></script>
+        <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
     <script src="js/controllers/MainCtrl.js"></script>
     </head> 
     <body>
         <div ng-controller="MainController">
-           <ol>
-               <li ng-repeat="activity in activities">
-                    {{activity.Name}} {{activity.avgRating}} {{activity.numberOfApplicatons}}
-               </li>
-           </ol> 
+            <div class="panel panel-default">
+                <div class="panel-heading">Top Rated Activities</a></div>
+                    <div class="panel-body">
+                        <div class="list-group">
+                                <a ng-repeat="activity in activities" class="list-group-item">
+                            <div>{{activity.Name}}  &#160 &#160 &#160 &#160 &#160 &#160 &#160 &#160 &#160 &#160 &#160 &#160 &#160  &#160 &#160  Activity Rating:&#160{{activity.avgRating}} &#160 &#160 &#160 &#160 &#160 &#160&#160 &#160 &#160 &#160   
+                                 Number Of Applicatons:&#160{{activity.numberOfApplicatons}}</div>
+                                </a>
+        </div>
+      </div>
+    </div>
         </div>
         <br>
         <br>
@@ -25,14 +35,6 @@
             <button class="btn btn-primary" type="submit">Rate</button>
         </form>
         <br>
-
-
-        
-            <input class="form-control" type="text" name="Rating"
-             placeholder="please enter aRating" ng-model="addratingcontroller.data.rating">
-             <br>
-             <button class= "btn btn-primary" ng-clilck="addratingcontroller.addRating(data)" type="submit"> Rate </button>
-             <h4>{{missingRatingError}}</h4>
         </div>
         
     </body>
