@@ -22,7 +22,7 @@ angular.module('mainCtrl', ['ngRoute', 'authServices']).controller('mainCtrl', f
        console.log("Hello");
         app.errorMsg = false;
         Auth.login(this.loginData).then(function(data) {
-                   console.log("Hellooooo ");
+                   console.log("Hedsdalooooo ");
             if (data.data.success) {
                 //Create success message
                 app.successMsg = data.data.message;
@@ -35,6 +35,8 @@ angular.module('mainCtrl', ['ngRoute', 'authServices']).controller('mainCtrl', f
                 app.errorMsg = data.data.message;
             }
         })
+               console.log("HI");
+
     };
     //loging out 
     this.logout = function() {
