@@ -34,14 +34,16 @@
     <script src="../../app//controllers/ActivitiesStuff/editActivity.js"></script>
     <script src="../../app/controllers/userCtrlIbrahim.js"></script>
     <script src="../../app/controllers/userCtrl.js"></script>
-    <script src="../../app/controllers/searchCtrl.js"> </script>
-    <script src="../../app/controllers/filterCtrl.js"> </script>
-    <script src="../../app/controllers/searchCompCtrl.js"> </script>
-    <script src="../../app/controllers/searchRateCtrl.js"> </script>
-    <script src="../../app//controllers/ActivitiesStuff/postReview.js"></script>
-
+    <script src="../../app/controllers/searchCtrl.js">
+    </script>
+    <script src="../../app/controllers/filterCtrl.js">
+    </script>
+    <script src="../../app/controllers/searchCompCtrl.js">
+    </script>
+    <script src="../../app/controllers/searchRateCtrl.js">
+    </script>
     <title>Theme Template for Bootstrap</title>
-z
+    z
 </head>
 
 <body ng-app="myApp" ng-controller="mainCtrl as main">
@@ -63,14 +65,15 @@ z
                     <li><a ng-show="!main.isLoggedIn" href="/login">Login</a></li>
                     <li><a ng-show="!main.isLoggedIn" href="/register">Register</a></li>
 
-                    <li><a ng-show="main.isLoggedIn && main.isCompany" href="Activities/{{main.username}}">Activities</a></li>                    
+                    <li><a ng-show="main.isLoggedIn && main.isCompany" href="Activities/{{main.username}}">Activities</a></li>
                     <li><a ng-show="main.isLoggedIn && main.isCompany" href="AddActivity">AddActivity</a></li>
                     <li><a ng-show="main.isLoggedIn && main.isCompany" href="Trash">Deleted Activities</a></li>
 
-                    <li><a ng-show="main.isLoggedIn" ng-click="main.getReviews(main.username)" href="/reviews">Reviews</a></li>
-                    <li><a ng-show="main.isLoggedIn"ng-click="main.regUser()" href="/editProfile">Edit Profile</a></li>
 
-                    <li><a href="/about">Home</a></li>
+                    <li><a ng-show="main.isLoggedIn" ng-click="main.getReviews(main.username)" href="/reviews">Reviews</a></li>
+                    <li><a ng-show="main.isLoggedIn" ng-click="main.regUser()" href="/editProfile">Edit Profile</a></li>
+
+                    <li><a href="/about">About</a></li>
                     <li><a ng-show="main.isLoggedIn" href="/viewCompanies">Companies</a></li>
                     <li><a ng-show="main.isLoggedIn && !main.isCompany" href="/myFavourites">My favourites</a></li>
                     <li><a ng-show="main.isLoggedIn && !main.isCompany" href="/mySubscribers">My Subscriptions</a></li>
@@ -80,17 +83,17 @@ z
                     <li><a ng-show="main.isLoggedIn && main.isSuperAdmin" href="/demote">Demote</a></li>
                     <li><a ng-show="main.isLoggedIn && main.isAdmin" href="/adminban">Admin</a></li>
                     <li class="dropdown">
-                    <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Search <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                    <li class="dropdown-header">Activities</li>
-                    <li><a href="/search">By Name</a></li>
-                    <li><a href="/searchRate">By Rating</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li class="dropdown-header">Companies</li>
-                    <li><a href="/filter">By location</a></li>
-                    <li><a href="/searchComp">By Name</a></li>
-                    </ul>
-                   </li>                    
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Search <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-header">Activities</li>
+                            <li><a href="/search">By Name</a></li>
+                            <li><a href="/searchRate">By Rating</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-header">Companies</li>
+                            <li><a href="/filter">By location</a></li>
+                            <li><a href="/searchComp">By Name</a></li>
+                        </ul>
+                    </li>
                     <li><a ng-show="main.isLoggedIn" href="#" ng-click="main.logout()">Logout</a></li>
 
                 </ul>

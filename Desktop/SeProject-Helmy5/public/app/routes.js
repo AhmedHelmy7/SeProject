@@ -29,24 +29,24 @@ angular.module('appRoutes', ['ngRoute', 'myFavouritesctrl', 'subListctrl', 'home
                 controllerAs: "ban"
             })
             .when('/editProfile', {
-		templateUrl: 'app/views/pages/edit.html',
-		controller: 'Ctrl',
-		controllerAs: 'user' //name of controller to be used in my app
-	})
+                templateUrl: 'app/views/pages/edit.html',
+                controller: 'Ctrl',
+                controllerAs: 'user' //name of controller to be used in my app
+            })
 
-		.when('/addToFavourites', {
-		templateUrl: 'app/views/pages/fav.html',
-		controller: 'Ctrl1',
-		controllerAs: 'user1' //name of controller to be used in my app
-	})
+        .when('/addToFavourites', {
+            templateUrl: 'app/views/pages/fav.html',
+            controller: 'Ctrl1',
+            controllerAs: 'user1' //name of controller to be used in my app
+        })
 
-			.when('/getSubList', {
-		templateUrl: 'app/views/pages/sub.html',
-		controller: 'Ctrl2',
-		controllerAs: 'user2' //name of controller to be used in my app
-	})
+        .when('/getSubList', {
+            templateUrl: 'app/views/pages/sub.html',
+            controller: 'Ctrl2',
+            controllerAs: 'user2' //name of controller to be used in my app
+        })
 
-            .when('/review', {
+        .when('/review', {
                 templateUrl: 'app/views/pages/Reviews.html',
                 controller: 'reviewCtrl',
                 controllerAs: "revCtrl"
@@ -124,39 +124,33 @@ angular.module('appRoutes', ['ngRoute', 'myFavouritesctrl', 'subListctrl', 'home
             .when('/reviews', {
                 templateUrl: 'app/views/pages/Activity/reviews.html'
             })
-            .when('/search',{
+            .when('/search', {
 
-             templateUrl : 'app/views/pages/search.html',
-              controller: 'schCtrl',
-             controllerAs: 'searching'
-        })
+                templateUrl: 'app/views/pages/search.html',
+                controller: 'schCtrl',
+                controllerAs: 'searching'
+            })
 
-        .when('/filter',{
+        .when('/filter', {
 
-             templateUrl : 'app/views/pages/filter.html',
-             controller : 'ftrCtrl',
-             controllerAs: 'filtering'
+                templateUrl: 'app/views/pages/filter.html',
+                controller: 'ftrCtrl',
+                controllerAs: 'filtering'
 
-         })
-            .when('/searchComp',{
+            })
+            .when('/searchComp', {
 
-            templateUrl : 'app/views/pages/searchComp.html',
-            controller : 'schCompCtrl',
-            controllerAs: 'searchingComp'
+                templateUrl: 'app/views/pages/searchComp.html',
+                controller: 'schCompCtrl',
+                controllerAs: 'searchingComp'
 
-         })
+            })
 
-         .when('/searchRate',{
+        .when('/searchRate', {
 
-            templateUrl : 'app/views/pages/searchRate.html',
-             controller : 'schRateCtrl',
-             controllerAs: 'searchingRate'
-
-         })
-         when('/postReview/:companyName', {
-                templateUrl: 'app/views/pages/Activity/postReview.html',
-                controller:   'postReviewCtrl',
-                controllerAs: 'postReviewCtrl'
+                templateUrl: 'app/views/pages/searchRate.html',
+                controller: 'schRateCtrl',
+                controllerAs: 'searchingRate'
 
             })
             .otherwise({ redirectTo: '/' });

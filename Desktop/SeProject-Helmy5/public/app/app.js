@@ -1,4 +1,4 @@
-angular.module('myApp',['appRoutes','mainCtrl','userControllers','userControllers2','userControllers1','userControllersIbrahim','myFavouritesctrl','authServices', 'addActivityCtrl', 'ActivitiesCtrl', 'deletedActivityCtrl', 'editActivityCtrl','subListctrl','homectrl','RegisterCtrl','RegisterCompCtrl','searchControllers','postReviewCtrl','filterControllers','searchCompControllers','searchRateControllers','compctrl','userControllersEmad','userControllersOmar'])
-.config(function($httpProvider) {
-    $httpProvider.interceptors.push('AuthInterceptors');
-});
+angular.module('myApp', ['appRoutes', 'mainCtrl', 'userControllers', 'userControllers2', 'userControllers1', 'userControllersIbrahim', 'myFavouritesctrl', 'authServices', 'addActivityCtrl', 'ActivitiesCtrl', 'deletedActivityCtrl', 'editActivityCtrl', 'subListctrl', 'homectrl', 'RegisterCtrl', 'RegisterCompCtrl', 'searchControllers', 'filterControllers', 'searchCompControllers', 'searchRateControllers', 'compctrl', 'userControllersEmad', 'userControllersOmar'])
+    .config(function($httpProvider) {
+        $httpProvider.interceptors.push('AuthInterceptors');
+    });

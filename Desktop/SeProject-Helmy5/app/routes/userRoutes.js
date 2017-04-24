@@ -4,9 +4,8 @@ var User = require('../models/user');
 var passport = require('passport');
 const jwt = require('jsonwebtoken');
 var userController = require('../controllers/userController');
-const config = require('//home/helmy/Desktop/SeProject-Helmy5/config/database.js');
+const config = require('/home/helmy/Desktop/SeProject-Helmy5/config/database.js');
 var session = require('express-session');
-
 
 router.post('/register', (req, res, next) => {
     let newUser = new User({
