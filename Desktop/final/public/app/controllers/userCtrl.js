@@ -12,7 +12,6 @@ angular.module('userControllers', [])
 angular.module('userControllers2', [])
     .controller('Ctrl2', function($scope,$http,$routeParams) {
     var app = $scope;
-        console.log("HELLOOO");
     function addtoSub()
     {
 
